@@ -1,7 +1,32 @@
 /* Author: Tony Ledoux R0982634 */
+@import url('https://fonts.googleapis.com/css2?family=Margarine&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+:root {
+    --primary-color: #66D668;
+    --secondary-color: #8EE190;
+    --tertiary-color: #2FB032;
+    --background-color: #F5F5F5;
+    --font-header: 'Margarine', sans-serif;
+    --font-body: 'Nunito', sans-serif;
+}
+
+html {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: 'Margarine', sans-serif;
+}
 body {
-    background-color: aqua;
+    background-color:var(--background-color);
+    font-family: var(--font-body);
+    color: var(--tertiary-color);
 }
 .logo {
     width: 350px;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    font-family: var(--font-header);
+    font-style: italic;
+    text-decoration: underline;
+    color: var(--primary-color);
 }
