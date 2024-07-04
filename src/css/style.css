@@ -20,8 +20,18 @@ body {
     font-family: var(--font-body);
     color: var(--tertiary-color);
 }
-.logo {
-    width: 350px;
+
+#Title, #Slogan {
+    display: block;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: var(--font-header);
+}
+#Slogan {
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400;

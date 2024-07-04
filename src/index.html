@@ -4,44 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healty Living Pharmacy</title>
+    <link rel="shortcut icon" href="assets/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Create a modal to explain that this is a fictional website -->
     <header>
-        <img class="logo" src="assets/hl_logo.svg" alt="logo">
+        <nav class="navbar navbar-expand-sm bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <div class="flex-shrink-0">
+                        <img src="assets/favicon.svg" width="100%" alt="logo">
+                    </div>
+                     <div class="flex-grow-1 ms-3">
+                        <span id="Title">Healty Living Pharmacy</span>
+                        <span id="Slogan">Veur a klappeke of pillekes</span>
+                     </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+           
+            <ul>
+                <li><a href="#Welcome">Welcome</a></li>
+                <li><a href="#Services">Services</a></li>
+                <li><a href="#Products">Products</a></li>
+                <li><a href="#Consult">Book a consult</a></li>
+                <li><a href="#About">About us</a></li>
+                <li><a href="#Contact">Contact</a></li>
+            </ul>
+        </nav>
+       
     </header>
     <main>
-        <section>
+        <section id="Welcome">
             <h2>Welcome</h2>
             <p>This is the welcome section</p>
+            <!-- implement a carousel with our empoyees -->
         </section>
-        <section>
+        <section id="Services">
             <h2>Services</h2>
             <p>What Services do we offer</p>
         </section>
-        <section>
+        <section id="Products">
             <h2>Products</h2>
             <p>What products do we offer</p>
         </section>
-        <section>
+        <section id="Consult">
             <h2>Book a consult</h2>
             <p>Calendar and form to book consults</p>
         </section>
-        <section>
+        <section id="About">
             <h2>About us</h2>
             <p>Here we will explain who we are</p>
         </section>
-        <section>
+        <section id="Contact">
             <h2>Contact</h2>
             <p>How to contact us</p>
         </section>
 
     </main>
     <footer>
-        <p></p>
-        <p> &copy; 2024 - Tony Ledoux - &reg;<a href="https://thomasmore.be">Thomas more</a></p>
+        <p>Opening hours</p>
+
+        <p> &copy; 2024 - Tony Ledoux - &reg; <a href="https://thomasmore.be">Thomas more</a></p>
     </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
