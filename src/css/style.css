@@ -18,25 +18,38 @@ html {
 body {
     background-color:var(--background-color);
     font-family: var(--font-body);
-    color: var(--tertiary-color);
+    background-color: red;
 }
 
-#Title, #Slogan {
-    display: block;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    font-family: var(--font-header);
+.navbar {
+   background-color: transparent;
 }
-#Slogan {
-    font-size: 1.5rem;
-    font-weight: 400;
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/header.svg');
+    background-size: contain;
+    background-repeat: repeat-x;
+    z-index: -1;
 }
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
     font-family: var(--font-header);
     font-style: italic;
     text-decoration: underline;
     color: var(--primary-color);
+}
+
+.active {
+    text-decoration: underline;
+    font-family: var(--font-header);
+}
+section {
+   height: 100vh;
 }
