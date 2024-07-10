@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     myModal.show();
     // add margin to the main content the size of the navbar
     const navbarHeight = document.getElementById("main_navigation").offsetHeight;
+    sessionStorage.setItem("navbarHeight", navbarHeight);
     const mainContent = document.getElementsByTagName("main")[0];
     mainContent.style.marginTop = navbarHeight + "px";
 });
@@ -17,13 +18,14 @@ for (let i = 0; i < navLinks.length; i++) {
     navLinks[i].addEventListener("click", function(event) {
         // prevent the default action
         event.preventDefault();
-        console.log(event);
         // scroll to the section with the id of the href and add the offset of the navbar then close the navbar
         const sectionId = navLinks[i].getAttribute("href");
         const section = document.querySelector(sectionId);
-        const navbarHeight = document.getElementById("main_navigation").offsetHeight;
+        //close the navbar if it is open to get the correct offset
+        const toggleButton = document.querySelector("button.navbar-toggler");
+        toggleButton.click();
         window.scrollTo({
-            top: section.offsetTop - navbarHeight,
+            top: section.offsetTop - sessionStorage.getItem("navbarHeight"),
             behavior: "smooth"
         });
     });
@@ -32,10 +34,9 @@ for (let i = 0; i < navLinks.length; i++) {
 // add event listener to set the active class on the navbar links
 document.addEventListener("scroll", function() {
     const sections = document.getElementsByTagName("section");
-    const navbarHeight = document.getElementById("main_navigation").offsetHeight;
     for (let i = 0; i < sections.length; i++) {
         const section = sections[i];
-        const sectionTop = section.offsetTop - navbarHeight;
+        const sectionTop = section.offsetTop - sessionStorage.getItem("navbarHeight");
         const sectionBottom = sectionTop + section.offsetHeight;
         if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
             const sectionId = "#" + section.id;

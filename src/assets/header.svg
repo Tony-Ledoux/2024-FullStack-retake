@@ -11,7 +11,7 @@
    xmlns:svg="http://www.w3.org/2000/svg">
    <style>
       #layer1 {
-      fill: olivedrab;
+      fill: #66D668;
       }
    </style>
   <defs

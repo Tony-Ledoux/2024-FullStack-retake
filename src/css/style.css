@@ -18,24 +18,23 @@ html {
 body {
     background-color:var(--background-color);
     font-family: var(--font-body);
-    background-color: red;
+    
 }
 
 .navbar {
-   background-color: transparent;
+   background-image: url('../assets/header.min.svg');
+   background-size: contain;
+   background-repeat: repeat-x;
 }
 
-.navbar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../assets/header.svg');
+footer {
+    background-image: url('../assets/footer.svg');
     background-size: contain;
     background-repeat: repeat-x;
-    z-index: -1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -43,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-header);
     font-style: italic;
     text-decoration: underline;
-    color: var(--primary-color);
+    color: var(--tertiary-color);
 }
 
 .active {
@@ -52,4 +51,54 @@ h1, h2, h3, h4, h5, h6 {
 }
 section {
    height: 100vh;
+   overflow-y: auto;
+   overflow-x: hidden;
+   scroll-behavior: smooth;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-weight: 200;
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: #000;
+    width: 12px ;
+    height: 12px ;
+    border-radius: 50%;
+    margin: 0 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+        
+.carousel-indicators .active {
+    background-color: var(--primary-color);
+}
+        
+.carousel-indicators [data-bs-target]:hover,
+.carousel-indicators [data-bs-target]:focus {
+    background-color: var(--primary-color);
+    outline: none;
+}
+
+.carousel-control-prev,
+.carousel-control-prev:focus,
+.carousel-control-next,
+.carousel-control-next:focus
+{
+    color: var(--tertiary-color);
+    opacity: 1;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover
+{
+    color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.5);
 }
