@@ -113,7 +113,7 @@ section {
 
 #Services .card {
     width: 20rem;
-    height: 40rem;
+    height: 100%;
 }
 
 #Services .card img {
