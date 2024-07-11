@@ -4,7 +4,7 @@
 // Things to do when the page is loaded
 document.addEventListener("DOMContentLoaded", function() {
     const myModal = new bootstrap.Modal(document.getElementById("fictional"));
-    myModal.show();
+    //myModal.show();
     // add margin to the main content the size of the navbar
     const navbarHeight = document.getElementById("main_navigation").offsetHeight;
     sessionStorage.setItem("navbarHeight", navbarHeight);
