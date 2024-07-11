@@ -31,6 +31,12 @@ body {
     text-decoration: underline;
     font-family: var(--font-header);
 }
+.navbar-brand span {
+    font-family: var(--font-header);
+    font-style: italic;
+    font-weight: 200;
+    color: black;
+}
 
 footer {
     background-image: url('../assets/footer.svg');
@@ -107,4 +113,19 @@ section {
 
 #Services .card {
     width: 25rem;
+    height: 40rem;
+}
+
+#Services .card img {
+    height: 12rem;
+    object-fit: cover;
+}
+
+#Services h3 {
+    text-align: center;
+    font-family: var(--font-header);
+    font-style: normal;
+    font-weight: 200;
+    color: var(--tertiary-color);
+    text-decoration: none;
 }
