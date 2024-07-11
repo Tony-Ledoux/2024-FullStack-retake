@@ -6,7 +6,7 @@
     <title>Healty Living Pharmacy</title>
     <link rel="shortcut icon" href="assets/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" >
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
+            <span class="modal-title" id="staticBackdropLabel">Warning</span>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -39,10 +39,10 @@
                 <a class="navbar-brand" href="#">
                     <div class="row">
                         <div class="col-4">
-                            <img src="assets/favicon.svg" width="60px" alt="logo">
+                            <img src="assets/favicon.svg" width="60" alt="logo">
                         </div>
                         <div class="col-8 text-center">
-                            Healty Living <br/> Pharmacy
+                            <span>Healty Living <br> Pharmacy </span>
                         </div>
                     </div>
                 </a>
@@ -69,13 +69,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#Contact">Contact</a>
                         </li>
+                    </ul>
+                </div>    
             </div>
         </nav>
        
        
     </header>
     <main>
-        <section id="Welcome">
+        <section id="Welcome" class="d-flex flex-column justify-content-center align-items-center">
             <!-- Make sure it is marked as a fictional website -->
             <div class="row">
                 <div class="col-md-6">
@@ -91,10 +93,10 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="assets/apo1.jpg" class="d-block w-100" alt="apotheker1">
-                                <div class="carousel-caption d-none d-lg-block">
+                                <!-- <div class="carousel-caption d-none d-sm-block">
                                     <h5>First slide label</h5>
                                     <p>Some representative placeholder content for the first slide.</p>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="carousel-item">
                                 <img src="assets/apo2.jpg" class="d-block w-100" alt="apotheker2">
@@ -125,35 +127,70 @@
                 </div>
                 <div class="col-md-6 order-first order-lg-last">
                      <h2>Welcome</h2>
-            <p>This is the welcome section</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui dolorum totam delectus eum quam aliquid odit, unde rem magni quo esse velit accusamus similique nulla!</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur asperiores mollitia laboriosam reprehenderit alias pariatur necessitatibus, dolores reiciendis incidunt amet, omnis architecto, vero ullam distinctio ipsa! Consectetur eum nulla quod quasi harum quam praesentium, natus molestias dicta quas similique quo non tempora vitae obcaecati odit dolorem quia cum cupiditate. Ratione.</p>
+                    <p>This is the welcome section</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui dolorum totam delectus eum quam aliquid odit, unde rem magni quo esse velit accusamus similique nulla!</p>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur asperiores mollitia laboriosam reprehenderit alias pariatur necessitatibus, dolores reiciendis incidunt amet, omnis architecto, vero ullam distinctio ipsa! Consectetur eum nulla quod quasi harum quam praesentium, natus molestias dicta quas similique quo non tempora vitae obcaecati odit dolorem quia cum cupiditate. Ratione.</p>
+                </div>
             </div>
         </section>
-        <section id="Services">
-            <h2>Services</h2>
+        <section id="Services" class="d-flex flex-column justify-content-center align-items-center">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Services</h2>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 py-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Perscription medication</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam temporibus repellat vitae fugit sint obcaecati ab facilis numquam recusandae quasi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 py-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>over the counter drugs</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam temporibus repellat vitae fugit sint obcaecati ab facilis numquam recusandae quasi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 py-2 mx-md-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>health consultations</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam temporibus repellat vitae fugit sint obcaecati ab facilis numquam recusandae quasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <p>What Services do we offer</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta aliquam provident exercitationem nesciunt optio quasi nostrum eos nihil architecto quo, quis, at error dolorem consectetur, sapiente animi ex saepe ipsam? Aliquam placeat, cupiditate modi officia repellendus eum quibusdam eligendi beatae, iusto, nostrum nobis? Odit veniam itaque vel, alias facere sequi.</p>
         </section>
-        <section id="Products">
+        <section id="Products" class="d-flex flex-column justify-content-center align-items-center">
             <h2>Products</h2>
             <p>What products do we offer</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dolorum quod quos placeat ipsam commodi, voluptate vero, laudantium pariatur consequatur voluptatibus harum quasi autem dolores. Consequuntur veniam harum earum nihil architecto atque aliquid, repellat itaque repudiandae. Ratione obcaecati totam unde enim temporibus, soluta eos dolorem id reprehenderit quis hic. Perferendis!</p>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi minima laborum explicabo alias aperiam et, aliquam sunt, tenetur facilis perspiciatis delectus magnam illo odit earum dolores, perferendis dolor quasi nihil minus est quos debitis. Libero, ullam necessitatibus quae alias fugiat hic eaque modi amet placeat quos, sed suscipit beatae saepe. Eaque veniam hic maiores aliquam commodi voluptatem deleniti quas esse nemo odio nesciunt facere, officiis numquam vero tempore ipsam similique delectus praesentium adipisci. Atque qui delectus ipsa! Minima consectetur est eum quo quod dolorem rerum dolores nesciunt magni optio! Dolor, unde? Et labore totam aspernatur. Asperiores illo deserunt eaque magnam ex rem, reiciendis accusantium non itaque aperiam sed quas, enim mollitia culpa iusto tenetur suscipit ipsam incidunt excepturi unde. Adipisci non fugit enim at eos assumenda delectus excepturi esse ratione harum velit, animi repudiandae iure beatae vel porro nihil! Et repudiandae omnis sequi, nesciunt dolores, amet eius ea fugiat molestias deserunt, commodi odio nemo eos? Maxime iure deleniti vero consequatur voluptatum eum rerum praesentium quam? Porro et repellendus sit veniam, itaque unde voluptatibus ut error tempore aliquid dignissimos, quia quas veritatis, doloribus nostrum repellat? Sequi reiciendis dolores pariatur. Eaque praesentium alias debitis cupiditate ratione assumenda recusandae aspernatur consequuntur pariatur obcaecati?</p>
         </section>
-        <section id="Consult">
+        <section id="Consult" class="d-flex flex-column justify-content-center align-items-center">
             <h2>Book a consult</h2>
             <p>Calendar and form to book consults</p>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi, dolores eum. Reiciendis quos ipsa aliquam architecto, a beatae impedit. Eligendi est quidem amet eius eos veritatis distinctio, iure delectus doloribus.</p>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis cum optio harum tenetur quas saepe, autem amet porro exercitationem modi provident commodi laborum necessitatibus inventore ipsa! Enim nulla laudantium sint dolorem quo aperiam ab nisi nostrum assumenda molestias perferendis quae, autem beatae, quia eveniet? Voluptatum qui, ex repudiandae deserunt consectetur quibusdam incidunt. Alias ad, soluta ipsum recusandae libero sit magni eum similique quasi nulla possimus nisi fuga molestias ipsa aperiam distinctio corporis. Mollitia omnis reprehenderit sed ratione recusandae, ipsum dolore, quae corporis itaque id ullam consequatur velit eius non optio veritatis commodi? Laborum numquam culpa corrupti, fugit eum vitae totam sunt in distinctio. Doloribus numquam facilis nostrum perspiciatis maxime ea similique assumenda corrupti. Fuga vel sit provident assumenda deserunt itaque! Optio ullam porro, quidem non nulla excepturi atque distinctio quis vitae perspiciatis in officiis maiores error, animi consequatur molestias ducimus totam alias quos aspernatur perferendis? Nemo vero excepturi dignissimos nesciunt quis qui soluta perferendis vel placeat! Quos dolore quia quidem repudiandae dolorum nulla excepturi odit atque nihil est nobis id porro fuga modi, repellat et culpa tempora sint rem? Qui deserunt saepe illum eius aspernatur enim rerum et libero. Assumenda exercitationem error corrupti, accusamus excepturi reiciendis quas at doloremque suscipit illo voluptates vero optio officiis voluptatibus itaque, magnam ducimus sequi molestias! Aperiam dolor tempora harum autem ad quo rerum rem vel, praesentium mollitia ab similique officiis amet sit? Quos nemo a commodi architecto! Quasi natus sapiente, ex aliquid quos ratione quam esse autem repellendus repudiandae eum modi ipsam reiciendis quibusdam ullam illum sed porro necessitatibus accusamus cumque. Ipsa temporibus quasi dolores blanditiis eligendi rem eos consequatur quo nostrum. Animi saepe officiis consequuntur nisi dolores sequi beatae ipsa inventore sed assumenda quasi porro in quae laudantium sunt a autem ratione, vel iste labore optio? Reprehenderit explicabo blanditiis dignissimos eius, rem minima facilis deserunt, omnis sint incidunt et inventore, veniam ab! Ipsam porro veniam consequatur, magnam architecto voluptates voluptas, nostrum amet impedit atque sapiente esse neque libero quos quis velit natus necessitatibus a! Repellendus necessitatibus natus qui ullam pariatur consequatur distinctio delectus cupiditate obcaecati eos, sed quidem tempora reiciendis commodi eaque eveniet itaque. Obcaecati voluptatem nostrum rem? Blanditiis dignissimos nam, quaerat doloremque in dolores! Praesentium recusandae laudantium, minus soluta tempore ullam maiores tenetur veniam cupiditate neque eligendi illum, tempora repudiandae, doloremque distinctio! Ad incidunt, delectus dicta minus ipsum nesciunt soluta vitae architecto! Dolorem ipsum ad facilis corrupti sunt deserunt at dolores in quaerat inventore. Debitis doloribus ipsam esse sapiente excepturi commodi tempore vel consequatur corrupti distinctio obcaecati quidem odio alias fuga eum nisi repudiandae saepe minima quam eligendi, voluptas ipsa rerum. A voluptas praesentium iusto, fugit magnam placeat dolorum facilis nemo sequi architecto quisquam quia vero dolor corrupti perferendis ea non tempora, voluptate labore alias! Deserunt error, quas consectetur qui doloremque incidunt? Quidem harum consequuntur sint animi, incidunt fuga magnam et deleniti ipsa, nobis quibusdam error reprehenderit deserunt aliquid odio, quas rem rerum laboriosam molestias dolores. Provident voluptatem nemo praesentium facilis excepturi aperiam sapiente consequatur, reiciendis magni dicta odit ipsam ea non.</p>
         </section>
-        <section id="About">
+        <section id="About" class="d-flex flex-column justify-content-center align-items-center">
             <h2>About us</h2>
             <p>Here we will explain who we are</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio nesciunt aut itaque adipisci maxime vero quam dolores voluptatibus facilis laudantium, consequatur ratione corporis vitae ipsam sint rem nihil necessitatibus voluptatem vel. Facere, natus officiis obcaecati voluptas nobis aliquam sint nulla vitae, accusamus, in blanditiis accusantium maxime! Reiciendis sequi minima repellat molestiae, reprehenderit commodi. Quo maiores commodi quae consectetur tenetur doloribus?</p>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores maxime quidem eum cum aspernatur quae minus saepe similique corrupti possimus unde ab accusamus odio, error quis aliquid reprehenderit veniam quam vel pariatur iusto. Et, beatae nostrum. Nesciunt, repudiandae consequatur debitis, magnam nostrum dolor perspiciatis, reprehenderit alias ut facilis molestias quae odit laborum obcaecati! Eligendi quaerat accusantium, nulla recusandae dolorum expedita rerum facilis! Dolorum corporis officiis quisquam corrupti adipisci veritatis, libero at consequuntur magni animi beatae deserunt ab recusandae, quia nesciunt facere. Animi voluptates quam enim, veniam deserunt rerum assumenda doloribus illum temporibus, soluta eos et recusandae, hic unde vero fuga.</p>
         </section>
-        <section id="Contact">
+        <section id="Contact" class="d-flex flex-column justify-content-center align-items-center">
             <!-- Contact form with progressbar -->
             <h2>Contact</h2>
             <p>How to contact us</p>

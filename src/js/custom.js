@@ -8,8 +8,14 @@ document.addEventListener("DOMContentLoaded", function() {
     // add margin to the main content the size of the navbar
     const navbarHeight = document.getElementById("main_navigation").offsetHeight;
     sessionStorage.setItem("navbarHeight", navbarHeight);
+    console.log("navbarHeight: " + navbarHeight);
     const mainContent = document.getElementsByTagName("main")[0];
     mainContent.style.marginTop = navbarHeight + "px";
+    // alter the section heights to be the window height minus the navbar height
+    const sections = document.getElementsByTagName("section");
+    for (let i = 0; i < sections.length; i++) {
+        sections[i].style.minHeight = window.innerHeight - navbarHeight + "px";
+    }
 });
 
 // add event listener to links in the navbar
