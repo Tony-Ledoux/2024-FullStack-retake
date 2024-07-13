@@ -8,21 +8,16 @@ document.addEventListener("DOMContentLoaded", function() {
     // add margin to the main content the size of the navbar
     const navbarHeight = document.getElementById("main_navigation").offsetHeight;
     document.getElementsByTagName("section")[0].style.paddingTop = navbarHeight + "px";
-    // sessionStorage.setItem("navbarHeight", navbarHeight);
-    // console.log("navbarHeight: " + navbarHeight);
-    // const mainContent = document.getElementsByTagName("main")[0];
-    // mainContent.style.marginTop = navbarHeight + "px";
-    // // alter the section heights to be the window height minus the navbar height
-    // const sections = document.getElementsByTagName("section");
-    // for (let i = 0; i < sections.length; i++) {
-    //     sections[i].style.minHeight = window.innerHeight - navbarHeight + "px";
-    // }
+    // add the active class to the first tab
+    const tabs = document.querySelectorAll("#collapseOTC .nav-tabs .nav-link");
+    console.log(tabs);
+    tabs[0].classList.add("active");
 });
 
 
 
 // add event listener to links in the navbar
-const navLinks = document.getElementsByClassName("nav-link");
+const navLinks = document.querySelectorAll("header a.nav-link");
 for (let i = 0; i < navLinks.length; i++) {
     navLinks[i].addEventListener("click", function(event) {
         // prevent the default action
@@ -39,6 +34,20 @@ for (let i = 0; i < navLinks.length; i++) {
         });
     });
 }
+
+const smProdTypeSelector = document.getElementById("small-screen-product-type-selector");
+smProdTypeSelector.addEventListener("change", function() {
+    // remove the active and show classes from all the product tab-pane divs
+    const tabPanes = document.querySelectorAll("#otcProducts .tab-pane");
+    for (let i = 0; i < tabPanes.length; i++) {
+        tabPanes[i].classList.remove("active", "show");
+    }
+    // get the selected value from the select element
+    const selectedValue = smProdTypeSelector.value;
+    // add the active and show classes to the selected tab-pane div
+    const selectedTabPane = document.querySelector("#otcProducts #" + selectedValue);
+    selectedTabPane.classList.add("active", "show");
+});
 
 // add event listener to set the active class on the navbar links
 document.addEventListener("scroll", function() {

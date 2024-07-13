@@ -4,7 +4,8 @@
     --primary-color: #66D668;
     --secondary-color: #8EE190;
     --tertiary-color: #2FB032;
-    --background-color: #F5F5F5;
+    --primary-background-color: #F5F5F5;
+    --secondary-background-color: #E5E5E5;
     --font-header: 'Margarine', sans-serif;
     --font-body: 'Nunito', sans-serif;
 
@@ -17,7 +18,7 @@ html {
     font-family: 'Margarine', sans-serif;
 }
 body {
-    background-color:var(--background-color);
+    background-color:var(--primary-background-color);
     font-family: var(--font-body);
 }
 
@@ -69,10 +70,10 @@ section {
 }
 
 section:nth-child(odd) {
-    background-color: var(--background-color);
+    background-color: var(--primary-background-color);
 }
 section:nth-child(odd) {
-    background-color: gold;
+    background-color: var(--secondary-background-color);
 }
 
 .carousel-caption {
@@ -148,23 +149,25 @@ section:nth-child(odd) {
     border-radius: 10px;
     border-top-left-radius: 0;
     border-bottom-right-radius: 0;
+    box-shadow: 3px 2px 5px var(--tertiary-color);
 }
 
 #collapseOTC .nav {
     background-color: transparent;
     border:none;
 }
-
-#collapseOTC .nav-tabs .nav-link {
-    background-color: transparent;
-    color: var(--primary-color);
-}
 #collapseOTC .nav-tabs {
     background-color: transparent;
 }
 
+#collapseOTC .nav-tabs .nav-link {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: solid 3px var(--primary-color);
+    border-bottom: none ;
+}
+
 #collapseOTC .nav-tabs .nav-link:hover {
-    
     border: solid 3px var(--primary-color);
     border-bottom: none;
     box-shadow: 3px -2px 5px var(--tertiary-color);
