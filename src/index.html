@@ -1,3 +1,11 @@
+<!-- 
+    TODO
+        MODAL Delivery request
+        CALENDAR FOR CONSULTS
+        ADDITIONAL INFO TO ABOUT US
+        CONTACT FORM
+        PROGRESSBAR FOR CONTACT FORM
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +39,6 @@
         </div>
       </div>
     </div>
-     <div class="container">
     <header>
         <!-- Navication must be clear and have links to sections-->
         <nav class="navbar navbar-expand-md fixed-top" id="main_navigation">
@@ -231,9 +238,56 @@
         </section>
         <section id="Products" class="d-flex flex-column justify-content-center align-items-center">
             <h2>Products</h2>
-            <p>What products do we offer</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dolorum quod quos placeat ipsam commodi, voluptate vero, laudantium pariatur consequatur voluptatibus harum quasi autem dolores. Consequuntur veniam harum earum nihil architecto atque aliquid, repellat itaque repudiandae. Ratione obcaecati totam unde enim temporibus, soluta eos dolorem id reprehenderit quis hic. Perferendis!</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi minima laborum explicabo alias aperiam et, aliquam sunt, tenetur facilis perspiciatis delectus magnam illo odit earum dolores, perferendis dolor quasi nihil minus est quos debitis. Libero, ullam necessitatibus quae alias fugiat hic eaque modi amet placeat quos, sed suscipit beatae saepe. Eaque veniam hic maiores aliquam commodi voluptatem deleniti quas esse nemo odio nesciunt facere, officiis numquam vero tempore ipsam similique delectus praesentium adipisci. Atque qui delectus ipsa! Minima consectetur est eum quo quod dolorem rerum dolores nesciunt magni optio! Dolor, unde? Et labore totam aspernatur. Asperiores illo deserunt eaque magnam ex rem, reiciendis accusantium non itaque aperiam sed quas, enim mollitia culpa iusto tenetur suscipit ipsam incidunt excepturi unde. Adipisci non fugit enim at eos assumenda delectus excepturi esse ratione harum velit, animi repudiandae iure beatae vel porro nihil! Et repudiandae omnis sequi, nesciunt dolores, amet eius ea fugiat molestias deserunt, commodi odio nemo eos? Maxime iure deleniti vero consequatur voluptatum eum rerum praesentium quam? Porro et repellendus sit veniam, itaque unde voluptatibus ut error tempore aliquid dignissimos, quia quas veritatis, doloribus nostrum repellat? Sequi reiciendis dolores pariatur. Eaque praesentium alias debitis cupiditate ratione assumenda recusandae aspernatur consequuntur pariatur obcaecati?</p>
+            <div class="accordion w-100" id="ProductAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingPerscription">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePerscription" aria-expanded="true" aria-controls="collapsePerscription">
+                           <i class="fa-solid fa-prescription"></i>&nbsp; Perscription Medication
+                        </button>
+                    </h2>
+                    <div id="collapsePerscription" class="accordion-collapse collapse show" aria-labelledby="headingPerscription" data-bs-parent="#ProductAccordion">
+                        <div class="accordion-body">
+                            <p>At Healthy Living Pharmacy, we go beyond standard prescriptions to provide comprehensive support for specialty medications as well. Specialty medications are often required for treating complex or chronic conditions such as cancer, rheumatoid arthritis, multiple sclerosis, and more. These medications often need special handling, administration, and monitoring.</p>
+                            <p>Specialty Medications at Healthy Living Pharmacy <br>
+                            <dl>
+                                <dt>Comprehensive Care:</dt>
+                                <dd>We understand the unique challenges associated with specialty medications. Our dedicated team offers personalized care plans tailored to meet your specific needs, ensuring you receive the most effective treatment.</dd>
+                                <dt>Special Handling:</dt>
+                                <dd>Our pharmacy is equipped to store and handle specialty medications that require specific conditions, ensuring they remain safe and effective.</dd>
+                                <dt>Expert Support:</dt>
+                                <dd>Our pharmacists are specially trained in managing specialty medications. They provide in-depth consultations to help you understand your treatment, manage side effects, and maximize the benefits of your medication.</dd>
+                                <dt>Insurance Assistance:</dt>
+                                <dd>Navigating insurance coverage for specialty medications can be complex. Our experienced staff will work with you and your insurance provider to help secure the coverage you need, reducing the financial burden of your treatment.</dd>
+                                <dt>Home Delivery:</dt>
+                                <dd>For your convenience, we offer home delivery services for specialty medications, ensuring you receive your medications promptly and securely without leaving your home.
+                                    <!-- Insert button to modal to request home delivery -->
+                                    <div class="text-center py-1">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fictional">
+                                        Request Home Delivery
+                                    </button> 
+                                    </div>
+                                </dd>
+                            </dl>
+                            </p>
+                            <p>At Healthy Living Pharmacy, we are committed to supporting your health journey with the highest level of care and expertise, particularly when it comes to managing complex conditions with specialty medications. Trust us to be your partner in achieving better health outcomes.</p>
+                            
+
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOTC">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOTC" aria-expanded="false" aria-controls="collapseOTC">
+                            <i class="fa-solid fa-pills"></i>&nbsp; Over-the-Counter Medication
+                        </button>
+                    </h2>
+                    <div id="collapseOTC" class="accordion-collapse collapse" aria-labelledby="headingOTC" data-bs-parent="#ProductAccordion">
+                        <div class="accordion-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <section id="Consult" class="d-flex flex-column justify-content-center align-items-center">
             <h2>Book a consult</h2>
@@ -265,7 +319,7 @@
         <p>Please keep in mind this is a fictional website</p>
         <p> &copy; 2024 - Tony Ledoux - &reg; <a href="https://thomasmore.be">Thomas more</a></p>
     </footer>
-    </div>
+
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/custom.js"></script>
 </body>

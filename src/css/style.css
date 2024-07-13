@@ -18,14 +18,16 @@ html {
 body {
     background-color:var(--background-color);
     font-family: var(--font-body);
-    
 }
 
 .navbar {
    background-image: url('../assets/header.min.svg');
    background-size: contain;
    background-repeat: repeat-x;
+   background-color: transparent;
 }
+
+
 
 .navbar .active {
     text-decoration: underline;
@@ -58,13 +60,18 @@ h1, h2, h3, h4, h5, h6 {
 
 
 section {
-   min-height: calc(100vh - 100px);
+   min-height: 100vh;
    overflow-y: auto;
    overflow-x: hidden;
    scroll-behavior: smooth;
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+   padding: 1rem;
+}
+
+section:nth-child(odd) {
+    background-color: var(--background-color);
+}
+section:nth-child(odd) {
+    background-color: gold;
 }
 
 .carousel-caption {
@@ -127,5 +134,9 @@ section {
     font-style: normal;
     font-weight: 200;
     color: var(--tertiary-color);
+    text-decoration: none;
+}
+
+#ProductAccordion h2 {
     text-decoration: none;
 }
