@@ -7,6 +7,7 @@
     --background-color: #F5F5F5;
     --font-header: 'Margarine', sans-serif;
     --font-body: 'Nunito', sans-serif;
+
 }
 
 html {
@@ -139,4 +140,45 @@ section:nth-child(odd) {
 
 #ProductAccordion h2 {
     text-decoration: none;
+}
+
+#collapseOTC .tab-content {
+    background-color: transparent;
+    border: solid 3px var(--primary-color);
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#collapseOTC .nav {
+    background-color: transparent;
+    border:none;
+}
+
+#collapseOTC .nav-tabs .nav-link {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+#collapseOTC .nav-tabs {
+    background-color: transparent;
+}
+
+#collapseOTC .nav-tabs .nav-link:hover {
+    
+    border: solid 3px var(--primary-color);
+    border-bottom: none;
+    box-shadow: 3px -2px 5px var(--tertiary-color);
+}
+
+#collapseOTC .nav-tabs .active{
+   border: solid 3px var(--primary-color);
+   color: whitesmoke;
+   border-bottom: none;
+   text-decoration: underline;
+   font-weight: bold;
+   background-color: var(--primary-color);
+   box-shadow: 3px -2px 5px var(--tertiary-color);
+}
+#collapseOTC .nav-tabs .active:hover {
+    box-shadow: inset 3px -2px 5px var(--tertiary-color);
 }

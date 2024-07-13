@@ -236,7 +236,7 @@
                 </div>
             </div>
         </section>
-        <section id="Products" class="d-flex flex-column justify-content-center align-items-center">
+        <section id="Products" class="d-flex flex-column justify-content-top align-items-center">
             <h2>Products</h2>
             <div class="accordion w-100" id="ProductAccordion">
                 <div class="accordion-item">
@@ -270,8 +270,6 @@
                             </dl>
                             </p>
                             <p>At Healthy Living Pharmacy, we are committed to supporting your health journey with the highest level of care and expertise, particularly when it comes to managing complex conditions with specialty medications. Trust us to be your partner in achieving better health outcomes.</p>
-                            
-
                         </div>
                     </div>
                 </div>
@@ -283,7 +281,73 @@
                     </h2>
                     <div id="collapseOTC" class="accordion-collapse collapse" aria-labelledby="headingOTC" data-bs-parent="#ProductAccordion">
                         <div class="accordion-body">
-
+                            <p>
+                                TODO insert vertical accordion with categories of OTC products
+                            </p>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pain-relief-tab" data-bs-toggle="tab" data-bs-target="#pain-relief" type="button" role="tab" aria-controls="pain-relief" aria-selected="true">Pain Relief</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="cold-flu-tab" data-bs-toggle="tab" data-bs-target="#cold-flu" type="button" role="tab" aria-controls="cold-flu" aria-selected="false">Cold & Flu</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="digestive-health-tab" data-bs-toggle="tab" data-bs-target="#digestive-health" type="button" role="tab" aria-controls="digestive-health" aria-selected="false">Digestive Health</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="allergy-relief-tab" data-bs-toggle="tab" data-bs-target="#allergy-relief" type="button" role="tab" aria-controls="allergy-relief" aria-selected="false">Allergy Relief</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="skin-care-tab" data-bs-toggle="tab" data-bs-target="#skin-care" type="button" role="tab" aria-controls="skin-care" aria-selected="false">Skin Care</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content px-4" id="otcProducts" >
+                                <div class="tab-pane fade active show" id="pain-relief" role="tabpanel" aria-labelledby="pain-relief-tab" tabindex="0">
+                                    <p>Manage headaches, muscle aches, and other pains with our range of analgesics.</p>
+                                    <ul>
+                                        <li>Acetaminophen</li>
+                                        <li>Ibuprofen</li>
+                                        <li>Aspirin</li>
+                                        <li>Naproxen</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="cold-flu" role="tabpanel" aria-labelledby="cold-flu-tab" tabindex="0">
+                                    <p>Find relief from symptoms like congestion, cough, and sore throat.</p>
+                                    <ul>
+                                        <li>Decongestants</li>
+                                        <li>Antihistamines</li>
+                                        <li>Cough Suppressants</li>
+                                        <li>Expectorants</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="digestive-health" role="tabpanel" aria-labelledby="digestive-health-tab" tabindex="0">
+                                    <p>From antacids to probiotics, support your digestive system with ease.</p>
+                                    <ul>
+                                        <li>Antacids</li>
+                                        <li>Probiotics</li>
+                                        <li>Laxatives</li>
+                                        <li>Anti-Diarrheal</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="allergy-relief" role="tabpanel" aria-labelledby="allergy-relief-tab" tabindex="0">
+                                    <p>Combat seasonal allergies with our selection of antihistamines and decongestants.</p>
+                                    <ul>
+                                        <li>Antihistamines</li>
+                                        <li>Decongestants</li>
+                                        <li>Nasal Sprays</li>
+                                        <li>Eye Drops</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="skin-care" role="tabpanel" aria-labelledby="skin-care-tab" tabindex="0">
+                                    <p>Treat minor cuts, burns, and rashes with our top-quality topical solutions.</p>
+                                    <ul>
+                                        <li>Antibiotic Ointments</li>
+                                        <li>Hydrocortisone Cream</li>
+                                        <li>Burn Cream</li>
+                                        <li>Calamine Lotion</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
