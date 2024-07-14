@@ -10,3 +10,7 @@ This is the project for the retake of the course.
 
 - **GitHub Repo**: [tony-ledoux/2024-FullStack-retake](https://github.com/Tony-Ledoux/2024-FullStack-retake.git)
 - **Netlify Hosting**: [tony-ledoux-fullstack-retake.netlify](https://tony-ledoux-fullstack-retake.netlify.app/)
+
+## BUGS
+
+- on small screens the size of the header is not the collapsed one
