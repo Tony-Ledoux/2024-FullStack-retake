@@ -23,10 +23,15 @@ body {
 }
 
 .navbar {
-   background-image: url('../assets/header.min.svg');
+   /* background-image: url('../assets/header.min.svg');
    background-size: contain;
-   background-repeat: repeat-x;
+   background-repeat: repeat-x; */
    background-color: transparent;
+}
+
+.navbar-scrolled {
+    background-color: var(--primary-color);
+    transition: background-color 0.3s ease;
 }
 
 
@@ -43,9 +48,7 @@ body {
 }
 
 footer {
-    background-image: url('../assets/footer.svg');
-    background-size: contain;
-    background-repeat: repeat-x;
+    background-color: var(--primary-color);
     position: absolute;
     left: 0;
     right: 0;
@@ -66,14 +69,27 @@ section {
    overflow-y: auto;
    overflow-x: hidden;
    scroll-behavior: smooth;
-   padding: 1rem;
+   padding:1rem 5%;
+   background-image: url('../assets/backdrop2.webp');
+   background-size: cover;
 }
+
 
 section:nth-child(odd) {
     background-color: var(--primary-background-color);
+    background-image: url('../assets/backdrop.webp');
+    background-size: cover;
 }
 section:nth-child(odd) {
     background-color: var(--secondary-background-color);
+}
+
+#WelcomeCarousel {
+    background-color: var(--primary-background-color);
+    width: 85%;
+    height: 85%;;
+    margin: auto;
+    box-shadow: 2px 3px 10px var(--tertiary-color);
 }
 
 .carousel-caption {
@@ -120,10 +136,15 @@ section:nth-child(odd) {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-#Services .card {
-    width: 20rem;
-    height: 100%;
+#Welcome .order-lg-last {
+    background: rgba(255, 255, 255,0.5);
+    box-shadow: 0 8px 10px var(--tertiary-color);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid var(--tertiary-color)
 }
+
 
 #Services .card img {
     height: 12rem;

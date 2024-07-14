@@ -1,27 +1,50 @@
 // Author: Tony Ledoux R0982634
 // Created: 2024-07-06
 
+let navClicked = false;
+
+function getNavbarHeight() {
+    const navbar = document.getElementById("main_navigation");
+    //close the navbar if it is open to get the correct offset
+    navbar.classList.remove("show");
+    const navbarHeight = document.getElementById("main_navigation").offsetHeight;
+    return navbarHeight;
+}
+
 // Things to do when the page is loaded
 document.addEventListener("DOMContentLoaded", function() {
     const myModal = new bootstrap.Modal(document.getElementById("fictional"));
     //myModal.show();
-    // add margin to the main content the size of the navbar
-    const navbarHeight = document.getElementById("main_navigation").offsetHeight;
-    document.getElementsByTagName("section")[0].style.paddingTop = navbarHeight + "px";
-    // add the active class to the first tab
-    const tabs = document.querySelectorAll("#collapseOTC .nav-tabs .nav-link");
-    console.log(tabs);
-    tabs[0].classList.add("active");
+
+    // if scrollY is greater than 0, add the navbar-scrolled class to the navbar
+    const navbar = document.getElementById("main_navigation");
+    if (window.scrollY > 0) {
+        navbar.classList.add("navbar-scrolled");
+    }
+    // add padding to the first section to account for the navbar height
+    const sections = document.getElementsByTagName("section");
+    sections[0].style.paddingTop = getNavbarHeight() + "px";
 });
 
+// add event listener for the scroll event to change the background color of the navbar when scrolling
+document.addEventListener("scroll", function() {
+    const navbar = document.getElementById("main_navigation");
+    if (window.scrollY > 0) {
+        navbar.classList.add("navbar-scrolled");
+    } else {
+        navbar.classList.remove("navbar-scrolled");
+    }
+});
 
 
 // add event listener to links in the navbar
 const navLinks = document.querySelectorAll("header a.nav-link");
 for (let i = 0; i < navLinks.length; i++) {
     navLinks[i].addEventListener("click", function(event) {
+        navClicked = true;
         // prevent the default action
         event.preventDefault();
+        event.stopPropagation();
         // scroll to the section with the id of the href and add the offset of the navbar then close the navbar
         const sectionId = navLinks[i].getAttribute("href");
         const section = document.querySelector(sectionId);
@@ -29,9 +52,10 @@ for (let i = 0; i < navLinks.length; i++) {
         const toggleButton = document.querySelector("button.navbar-toggler");
         toggleButton.click();
         window.scrollTo({
-            top: section.offsetTop - sessionStorage.getItem("navbarHeight"),
-            behavior: "smooth"
+            top: section.offsetTop - getNavbarHeight(),
+            behavior: "smooth",
         });
+
     });
 }
 
@@ -50,21 +74,21 @@ smProdTypeSelector.addEventListener("change", function() {
 });
 
 // add event listener to set the active class on the navbar links
-document.addEventListener("scroll", function() {
-    const sections = document.getElementsByTagName("section");
-    for (let i = 0; i < sections.length; i++) {
-        const section = sections[i];
-        const sectionTop = section.offsetTop - sessionStorage.getItem("navbarHeight");
-        const sectionBottom = sectionTop + section.offsetHeight;
-        if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-            const sectionId = "#" + section.id;
-            const navLinks = document.getElementsByClassName("nav-link");
-            for (let j = 0; j < navLinks.length; j++) {
-                navLinks[j].classList.remove("active");
-                if (navLinks[j].getAttribute("href") === sectionId) {
-                    navLinks[j].classList.add("active");
-                }
+document.addEventListener("scroll", function(event) {
+        const sections = document.getElementsByTagName("section");
+        for (let i = 0; i < sections.length; i++) {
+            const section = sections[i];
+            const sectionTop = section.offsetTop - getNavbarHeight();
+            const sectionBottom = sectionTop + section.offsetHeight;
+            if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                const sectionId = "#" + section.id;
+                const navLinks = document.querySelectorAll("header a.nav-link");
+                    for (let j = 0; j < navLinks.length; j++) {
+                        navLinks[j].classList.remove("active");
+                        if (navLinks[j].getAttribute("href") === sectionId) {
+                             navLinks[j].classList.add("active");
+                        }
+                    }
             }
         }
-    }
 });
