@@ -70,19 +70,34 @@ section {
    overflow-x: hidden;
    scroll-behavior: smooth;
    padding:1rem 5%;
-   background-image: url('../assets/backdrop2.webp');
    background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
 }
 
 
 section:nth-child(odd) {
     background-color: var(--primary-background-color);
-    background-image: url('../assets/backdrop.webp');
-    background-size: cover;
 }
 section:nth-child(odd) {
     background-color: var(--secondary-background-color);
 }
+section:nth-child(2){
+    background-image: url('../assets/backdrop.webp');
+}
+section:nth-child(3){
+    background-image: url('../assets/backdrop2.webp');
+}
+section:nth-child(4){
+    background-image: url('../assets/backdrop3.webp');
+}
+section:nth-child(5){
+    background-image: url('../assets/backdrop4.webp');
+}
+section:first-child, section:last-child {
+     background-image: url('../assets/backdrop2.webp');
+}
+
 
 #WelcomeCarousel {
     width: 85%;

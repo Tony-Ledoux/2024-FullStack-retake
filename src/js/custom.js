@@ -4,9 +4,6 @@
 let navClicked = false;
 
 function getNavbarHeight() {
-    const navbar = document.getElementById("main_navigation");
-    //close the navbar if it is open to get the correct offset
-    navbar.classList.remove("show");
     const navbarHeight = document.getElementById("main_navigation").offsetHeight;
     return navbarHeight;
 }
