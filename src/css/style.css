@@ -223,3 +223,14 @@ section:first-child, section:last-child {
 #collapseOTC .nav-tabs .active:hover {
     box-shadow: inset 3px -2px 5px var(--tertiary-color);
 }
+.icon-link i{
+    text-decoration: none !important;
+    color: inherit;
+}
+.icon-link {
+    text-decoration: none;
+}
+
+.icon-link-hover:hover i{
+    transform: translate3d(0,-.250rem,0);
+}

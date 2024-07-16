@@ -4,8 +4,9 @@
 let navClicked = false;
 
 function getNavbarHeight() {
-    const navbarHeight = document.getElementById("main_navigation").offsetHeight;
-    return navbarHeight;
+    const navbar = document.getElementById("main_navigation");
+    const menu = document.getElementById("navbarSupportedContent"); //menu.offsetHeight = 0 when the menu is collapsed
+    return navbar.offsetHeight - menu.offsetHeight;
 }
 
 // Things to do when the page is loaded
@@ -88,4 +89,26 @@ document.addEventListener("scroll", function(event) {
                     }
             }
         }
+});
+
+// add event linster for date-picker change
+const datePicker = document.getElementById("date-picker");
+datePicker.addEventListener("change", function() {
+    const selectedDate = datePicker.value;
+    //if date is 2 weeks from now appointments cannot be made
+    const date = new Date(selectedDate);
+    const today = new Date();
+    const twoWeeks = new Date(today);
+    twoWeeks.setDate(today.getDate() + 14);
+    if (date > twoWeeks) {
+        //alert the user that appointments cannot be made more than 2 weeks in advance
+        // show no appointments available
+    }
+    //if date is on a sunday we are closed
+    if (date.getDay() === 0) {
+        //alert the user that we are closed on sundays
+        // show no appointments available
+        
+    }
+    console.log(selectedDate);
 });
