@@ -34,6 +34,19 @@ document.addEventListener("scroll", function() {
     }
 });
 
+// add event listener for the click event on the navbar-toggler button to add the navbar-scrolled class to the navbar when the menu is open
+const toggleButton = document.querySelector("button.navbar-toggler");
+toggleButton.addEventListener("click", function() {
+    const navbar = document.getElementById("main_navigation");
+    if (toggleButton.getAttribute("aria-expanded") === "true") {
+        navbar.classList.add("navbar-scrolled");
+    } else {
+        if (window.scrollY === 0) {
+            navbar.classList.remove("navbar-scrolled");
+        }
+    }
+});
+
 
 // add event listener to links in the navbar
 const navLinks = document.querySelectorAll("header a.nav-link");

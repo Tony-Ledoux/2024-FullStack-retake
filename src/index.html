@@ -426,8 +426,21 @@
             <!-- Contact form with progressbar -->
             <h2>Contact</h2>
             <div class="glass-pane w-100">
-                <p>How to contact us</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat atque, quam ut natus tempora hic!</p>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <form action="#" method="post">
+                            <label for="from" class="form-label col-md-4">Your name:</label>
+                            <input type="text" name="from" id="from" class="form-control col-md-8">
+                            <label for="email" class="form-label col-md-4">your email adress</label>
+                            <input type="email" name="email" id="email" class="form-control col-md-8">
+                            <label for="subject" class="form-label col-md-4">Subject:</label>
+                            <input type="text" name="subject" id="subject" class="form-control col-md-8">
+                            <label for="message" class="form-label col-md-4">Message:</label>
+                            <textarea name="message" id="message" class="form-control col-md-8"></textarea>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                </form>
             </div>
         </section>
 
