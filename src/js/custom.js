@@ -252,6 +252,9 @@ function isBreakpointActive(breakpoint) {
                console.log(activeCard);
                //aboutLinks[activeCard/2+1].classList.add("active");
             }
+            //remove focus from the clicked link
+            event.target.blur();
+            
             
             
         });

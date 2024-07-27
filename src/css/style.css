@@ -289,3 +289,20 @@ section:first-child, section:last-child {
     height: 200px;
     object-fit: cover;
 }
+
+#About .pagination {
+    --bs-pagination-color: var(--primary-color);
+    --bs-pagination-border-color: var(--primary-color);
+    --bs-pagination-active-bg:var(--primary-color);
+    --bs-pagination-active-border-color: var(--tertiary-color);
+    --bs-pagination-hover-bg: var(--tertiary-color);
+    --bs-pagination-hover-border-color: var(--tertiary-color);
+    --bs-pagination-hover-color: var(--primary-color);
+    --bs-pagination-focus-bg: var(--tertiary-color);
+    --bs-pagination-focus-border-color: var(--tertiary-color);
+    --bs-pagination-focus-color: whitesmoke;
+    --bs-pagination-focus-box-shadow: 3px 2px 5px var(--tertiary-color);
+}
+#About .pagination-sm {
+    --bs-pagination-border-radius: 10px;
+}
