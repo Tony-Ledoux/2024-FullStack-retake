@@ -14,3 +14,4 @@ This is the project for the retake of the course.
 ## BUGS
 
 - on small screens the size of the header is not the collapsed one
+

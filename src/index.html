@@ -426,20 +426,48 @@
             <!-- Contact form with progressbar -->
             <h2>Contact</h2>
             <div class="glass-pane w-100">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                <div class="alert alert-success alert-dismissible fade d-none" role="alert">
+                  <strong>Success!</strong> Your Message is send and you can espect an answer whitin 48 workhours.
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <form action="#" method="post">
-                            <label for="from" class="form-label col-md-4">Your name:</label>
-                            <input type="text" name="from" id="from" class="form-control col-md-8">
-                            <label for="email" class="form-label col-md-4">your email adress</label>
-                            <input type="email" name="email" id="email" class="form-control col-md-8">
-                            <label for="subject" class="form-label col-md-4">Subject:</label>
-                            <input type="text" name="subject" id="subject" class="form-control col-md-8">
-                            <label for="message" class="form-label col-md-4">Message:</label>
-                            <textarea name="message" id="message" class="form-control col-md-8"></textarea>
-                            <button type="submit" class="btn btn-primary">Send</button>
+                <form action="#" method="post" id="contact-form" class="needs-validation" novalidate>
+                    <div class="progress" role="progressbar" aria-label="form completion" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div id="progress-bar" class="progress-bar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                    </div>
+                    <div class="row g-2 mt-2">
+                        <div class="col-md-3">
+                            <label for="from" class="form-label">Your name:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" name="from" id="from" class="form-control" minlength="3" required>
+                            <div class="invalid-feedback">Please enter a minimum of 3 characters</div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="email" class="form-label">your email adress</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="email" name="email" id="email" class="form-control"  minlength="3" required>
+                            <div class="invalid-feedback">Please enter a valid email</div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="subject" class="form-label">Subject:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" name="subject" id="subject" class="form-control" minlength="3" required>
+                            <div class="invalid-feedback">Please enter a minimum of 3 characters</div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <textarea name="message" id="message" class="form-control" placeholder="Enter your question here." minlength="10" maxlength="255" required></textarea>
+                                <label for="message" class="form-label">Message:</label>
+                                <div class="invalid-feedback">Please enter a minimum of 10 characters and a maximum of 255 characters</div>
+                                <div id="message-counter" class="text-end">0/255</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary disabled">Send</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </section>

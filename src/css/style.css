@@ -234,3 +234,53 @@ section:first-child, section:last-child {
 .icon-link-hover:hover i{
     transform: translate3d(0,-.250rem,0);
 }
+
+#Contact #message {
+    height: 10rem;
+    resize: none;
+}
+
+#Contact .form-control:focus {
+    border: solid 3px var(--primary-color);
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 3px 2px 5px var(--tertiary-color);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--primary-color);
+    --bs-btn-border-color:var(--primary-color);
+    --bs-btn-hover-bg: var(--tertiary-color);
+    --bs-btn-hover-border-color: var(--tertiary-color);
+    --bs-btn-focus-bg: var(--tertiary-color);
+    --bs-btn-focus-border-color: var(--tertiary-color);
+    --bs-btn-focus-shadow-rgb: 102, 214, 102    ;       
+    --bs-btn-active-bg: var(--secondary-color);
+    --bs-btn-active-border-color: var(--secondary-color);
+    --bs-btn-active-shadow: 3px 2px 5px var(--tertiary-color);
+    --bs-btn-disabled-bg: var(--secondary-color);
+    --bs-btn-disabled-border-color: var(--secondary-color);
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#message-counter {
+    color: var(--tertiary-color);
+    font-style: italic;
+    font-weight: 200;
+    font-size: 0.85rem;
+}
+
+#progress-bar {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.success {
+    background-color: var(--tertiary-color) !important;
+    box-shadow: inset 2px 1px 5px var(--primary-color);
+}

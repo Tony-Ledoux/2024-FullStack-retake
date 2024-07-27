@@ -125,3 +125,65 @@ datePicker.addEventListener("change", function() {
     }
     console.log(selectedDate);
 });
+
+// add event listener for the contact form progress bar
+const contactForm = document.getElementById("contact-form");
+const contactSubmit = contactForm.querySelector("button[type='submit']");
+contactForm.addEventListener("change", function() {
+    const progressBar = document.getElementById("progress-bar");
+    const inputs = document.querySelectorAll("#contact-form input, #contact-form textarea");
+    let progress = 0;
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].value !== "") {
+            progress += 25;
+        }
+    }
+    progressBar.style.width = progress + "%";
+    progressBar.innerHTML = progress + "%";
+    progressBar.setAttribute("aria-valuenow", progress);
+    if (progress === 100) {
+        progressBar.classList.add("success");
+        contactSubmit.classList.remove("disabled");
+    } else {
+        progressBar.classList.remove("success");
+        contactSubmit.classList.add("disabled");
+    }
+});
+
+// event listener for keypress on message input
+const messageInput = document.getElementById("message");
+messageInput.addEventListener("input", function() {
+    const message = messageInput.value;
+    const messageLength = message.length;
+    console.log(message,messageLength);
+    const messageCount = document.getElementById("message-counter");
+    messageCount.innerHTML = messageLength+"/" + messageInput.maxLength;
+    if (messageLength  <messageInput.minLength || messageLength > messageInput.maxLength) {
+        messageCount.classList.add("text-danger");
+    } else {
+        messageCount.classList.remove("text-danger");
+    }
+});
+// stop form subission if not valid
+(() => {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach((form) => {
+        form.addEventListener(
+            "submit",
+            (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add("was-validated");
+            },
+            false
+        );
+    });
+})();
