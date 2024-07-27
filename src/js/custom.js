@@ -126,6 +126,140 @@ datePicker.addEventListener("change", function() {
     console.log(selectedDate);
 });
 
+//About section
+function isBreakpointActive(breakpoint) {
+    // Create a temporary element
+    var tempElement = document.createElement("div");
+    tempElement.className = `d-${breakpoint}-none`; // Apply the breakpoint class
+    document.body.appendChild(tempElement); // Append the element to the body
+
+    // Check if the element is visible
+    var isActive = window.getComputedStyle(tempElement).display === "none";
+
+    // Remove the temporary element
+    document.body.removeChild(tempElement);
+
+    return isActive;
+}    
+
+
+    function hideCards(Cards) {
+        for (let i = 0; i < Cards.length; i++) {
+            const card = Cards[i];
+            if (!card.classList.contains("d-none")) {
+                card.classList.add("d-none");
+            }
+            card.classList.remove("d-lg-block");
+        }
+    }
+
+    function showCard(Cards, index) {
+        const card = Cards[index];
+        if (card.classList.contains("d-none")) {
+            card.classList.remove("d-none");
+        }
+        let next = index + 1;
+        if (next >= Cards.length) {
+            next = 0;
+        }
+        const nextCard = Cards[next];
+        nextCard.classList.add("d-lg-block");
+    }
+
+    let activeCard = 0;
+
+    const Cards = document.querySelectorAll("#About .col-lg-6 ");
+    console.log(Cards);
+  // disable nav links with event listener
+    const aboutLinks = document.querySelectorAll("#About nav li");
+    for (let i = 0; i < aboutLinks.length; i++) {
+        aboutLinks[i].addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const action = event.target.innerHTML;
+            console.log(action);
+            hideCards(Cards);
+            // clear the active class from all the nav links
+            for (let j = 0; j < aboutLinks.length; j++) {
+                aboutLinks[j].classList.remove("active");
+            }
+            switch (action) {
+                case "Previous":
+                    if (isBreakpointActive("lg")) {
+                        activeCard -= 2;
+                        // if card is less than 0, set it to the last card index
+                        if (activeCard < 0) {
+                            activeCard = Cards.length - 2;
+                        }
+                    }else{
+                        activeCard -= 1;
+                        // if card is less than 0, set it to the last card index
+                        if (activeCard < 0) {
+                            activeCard = Cards.length - 1;
+                        }
+                    } 
+                    break;
+                case "Next":
+                    if (isBreakpointActive("lg")) {
+                        activeCard += 2;
+                    } else {
+                        activeCard += 1; // if 2 cards visible, activeCard -= 2
+                    }
+                    // if card is greater than the last card index, set it to 0
+                    if (activeCard >= Cards.length) {
+                        activeCard = 0;
+                    } 
+                    break;
+                default:
+                    if (isBreakpointActive("lg")) {
+                        switch (action) {
+                            case "1":
+                                activeCard = 0;
+                                break;
+                            case "2":
+                                activeCard = 2;
+                                break;
+                            case "3":
+                                activeCard = 4;
+                                break;
+                        }
+                    } else {
+                        activeCard = parseInt(action) - 1;
+                    }
+                    if (activeCard >= Cards.length) {
+                        activeCard = 0;
+                    }
+                    if (activeCard < 0) {
+                        activeCard = Cards.length - 1;
+                    }
+                    
+                    
+                    break;
+            }
+            showCard(Cards, activeCard);
+            if(!isBreakpointActive("lg")){
+                aboutLinks[activeCard+1].classList.add("active");
+            }else{
+                if(activeCard == 0 || activeCard == 1){
+                    aboutLinks[1].classList.add("active");
+                }
+                if(activeCard == 2 || activeCard == 3){
+                    aboutLinks[2].classList.add("active");
+                }
+                if(activeCard == 4 || activeCard == 5){
+                    aboutLinks[3].classList.add("active");
+                }
+               console.log(activeCard);
+               //aboutLinks[activeCard/2+1].classList.add("active");
+            }
+            
+            
+        });
+    }
+    
+
+
+
 // add event listener for the contact form progress bar
 const contactForm = document.getElementById("contact-form");
 const contactSubmit = contactForm.querySelector("button[type='submit']");
