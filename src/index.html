@@ -1,14 +1,10 @@
-<!-- 
-    TODO
-        MODAL Delivery request
-        CALENDAR FOR CONSULTS
-        ADDITIONAL INFO TO ABOUT US
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the landingpage for Healthy Living Pharmacy, A fictional pharmacy. This is a educational task for the Thomas More community collage.">
+    <meta name="author" content="Tony Ledoux">
     <title>Healty Living Pharmacy</title>
     <link rel="shortcut icon" href="assets/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -37,6 +33,75 @@
         </div>
       </div>
     </div>
+    <!-- Off canvas for the control panel -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="controlPanel" data-bs-backdrop="static" aria-labelledby="controlPanelLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="controlPanelLabel">Control Panel</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="accordion" id="controlPanelAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fa-solid fa-question"></i>&nbsp; questions
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#controlPanelAccordion">
+                        <div class="accordion-body">
+                            <p>Received questions</p>
+                            <a href="#Welcome" class="btn btn-primary">Go</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="fa-solid fa-handshake"></i>&nbsp; Services
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#controlPanelAccordion">
+                        <div class="accordion-body">
+                            <p>Jump to the services section</p>
+                            <a href="#Services" class="btn btn-primary">Go</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="fa-solid fa-pills"></i>&nbsp; Products
+                        </button>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main content -->
     <header>
         <!-- Navication must be clear and have links to sections-->
         <nav class="navbar navbar-expand-md fixed-top" id="main_navigation">
@@ -412,8 +477,9 @@
             
         </section>
         <section id="About" class="d-flex flex-column justify-content-center align-items-center">
-            <h2>About us</h2>
+            <!-- TODO: make it dynamic -->
             <div class="glass-pane">
+                <h2 class="text-center">About us</h2>
                 <div class="row">
                     <div class="col-12">
                         <p>Welcome to our vibrant team of young pharmacists, where innovation meets expertise! We are a dedicated group of professionals passionate about advancing healthcare and improving patient outcomes. With our fresh perspectives and dynamic approach, we strive to deliver personalized and efficient pharmaceutical care. Our team blends cutting-edge knowledge with a compassionate touch, ensuring that every patient receives the best possible care. Join us as we embark on this exciting journey to revolutionize the world of pharmacy, one prescription at a time.</p>
@@ -424,6 +490,7 @@
                                     <p>Jack Ryan</p>
                                 </div>
                                 <div class="card-body row">
+                                    <span class="badge ribbon">Available <br> Today</span>
                                     <img src="assets/apo1.jpg" alt="Jack Ryan" class="col-4 my-auto">
                                     <p class="col-8">Jack Ryan is a licensed pharmacist with over 10 years of experience in the field. He is dedicated to providing exceptional care to all patients and is committed to improving health outcomes through personalized service and expert advice. Jack is passionate about helping patients achieve their health goals and is always available to answer questions and provide guidance on medications and wellness.</p>
                                 </div>
@@ -575,14 +642,30 @@
 
     </main>
     <footer class="text-center">
-        <div class="text-start">
-            <h3>Opening hours</h3>
-            <p>Monday - Friday: 8:00 - 18:00</p>
-            <p>Saturday: 8:00 - 12:00</p>
-            <p>Sunday: Closed</p>
+        <div class="row">
+            <div class="text-start col-6">
+                <p>
+                    Opening Hours: <br>
+                    Monday - Friday: 8:00 - 18:00 <br>
+                    Saturday: 8:00 - 12:00 <br>
+                    Sunday: Closed
+                </p>
+            </div>
+            <div class="text-center col-6">
+                <p>
+                    Healthy Living Pharmacy <br>
+                    123 Main Street <br>
+                    Antwerp, Belgium <br>
+                    Tel: +32 123 456 789 <br>
+                    Email: <a href="mailto:noreply@hlf.com">not-a-real-mail@hlf.com</a>
+                </p>
+            </div>
+            <div class="col-12">
+                Please keep in mind this is a fictional website <br>
+                &copy; 2024 - Tony Ledoux - &reg; <a href="https://thomasmore.be">Thomas more</a>
+                <button id="controlBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#controlPanel">Control-panel</button>
+            </div>
         </div>
-        <p>Please keep in mind this is a fictional website</p>
-        <p> &copy; 2024 - Tony Ledoux - &reg; <a href="https://thomasmore.be">Thomas more</a></p>
     </footer>
 
     <script src="js/bootstrap.bundle.min.js"></script>

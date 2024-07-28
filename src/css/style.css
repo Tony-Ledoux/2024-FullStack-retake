@@ -266,6 +266,26 @@ section:first-child, section:last-child {
     border-bottom-right-radius: 0;
 }
 
+.btn-secondary {
+    --bs-btn-bg: var(--secondary-color);
+    --bs-btn-border-color:var(--secondary-color);
+    --bs-btn-hover-bg: var(--tertiary-color);
+    --bs-btn-hover-border-color: var(--tertiary-color);
+    --bs-btn-focus-bg: var(--tertiary-color);
+    --bs-btn-focus-border-color: var(--tertiary-color);
+    --bs-btn-focus-shadow-rgb: 102, 214, 102    ;       
+    --bs-btn-active-bg: var(--primary-color);
+    --bs-btn-active-color: black;
+    --bs-btn-active-border-color: black;
+    --bs-btn-active-shadow: 3px 2px 5px var(--tertiary-color);
+    --bs-btn-disabled-bg: var(--secondary-background-color-color);
+    --bs-btn-disabled-border-color: var(--secondary-background-color);
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
 #message-counter {
     color: var(--tertiary-color);
     font-style: italic;
@@ -306,3 +326,28 @@ section:first-child, section:last-child {
 #About .pagination-sm {
     --bs-pagination-border-radius: 10px;
 }
+.ribbon {
+    position: absolute;
+    background-color: red;
+    right: 10px;
+    top: 10px;
+    z-index: 1;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    padding: 0.5rem;
+    text-align: center;
+    border : solid 3px var(--primary-color);
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 3px 2px 5px var(--tertiary-color);
+    transform: rotate(15deg);
+}
+
+#controlBtn {
+float: right;
+clear: both;
+}
+
+

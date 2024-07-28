@@ -254,9 +254,6 @@ function isBreakpointActive(breakpoint) {
             }
             //remove focus from the clicked link
             event.target.blur();
-            
-            
-            
         });
     }
     
@@ -324,3 +321,21 @@ messageInput.addEventListener("input", function() {
         );
     });
 })();
+
+function isLoggedIn() {
+    // if there is a token in session storage, return true else return false
+    return true; // change to true if logged in
+}
+
+// on opening of the offcanvas, check if logged in
+const offcanvas = document.getElementById("controlPanel");
+offcanvas.addEventListener("show.bs.offcanvas", function(event) {
+    const loggedIn = isLoggedIn();
+    if (!loggedIn) {
+        // prevent the offcanvas from opening
+        event.preventDefault();
+        // show the login modal
+        const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
+        loginModal.show();
+    }
+});
