@@ -50,7 +50,9 @@
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#controlPanelAccordion">
                         <div class="accordion-body">
                             <p>Received questions</p>
-                            <a href="#Welcome" class="btn btn-primary">Go</a>
+                            <ul id="q_placeholder" class="list-group">
+                                <li class="list-group-item"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -484,104 +486,36 @@
                     <div class="col-12">
                         <p>Welcome to our vibrant team of young pharmacists, where innovation meets expertise! We are a dedicated group of professionals passionate about advancing healthcare and improving patient outcomes. With our fresh perspectives and dynamic approach, we strive to deliver personalized and efficient pharmaceutical care. Our team blends cutting-edge knowledge with a compassionate touch, ensuring that every patient receives the best possible care. Join us as we embark on this exciting journey to revolutionize the world of pharmacy, one prescription at a time.</p>
                     </div>
-                    <div class="col-lg-6">
-                         <div class="card">
+                    <div class="row g-2" id="team-cards-placeholder">
+                        <div class="col-lg-6">
+                            <!-- loading card -->
+                             <div class="card">
                                 <div class="card-header">
-                                    <p>Jack Ryan</p>
+                                    <p class="card-text placeholder-glow"><span class="placeholder col-5"></span></p>
                                 </div>
                                 <div class="card-body row">
-                                    <span class="badge ribbon">Available <br> Today</span>
-                                    <img src="assets/apo1.jpg" alt="Jack Ryan" class="col-4 my-auto">
-                                    <p class="col-8">Jack Ryan is a licensed pharmacist with over 10 years of experience in the field. He is dedicated to providing exceptional care to all patients and is committed to improving health outcomes through personalized service and expert advice. Jack is passionate about helping patients achieve their health goals and is always available to answer questions and provide guidance on medications and wellness.</p>
+                                    <img src="assets/anonimouspharmacists.png" alt="loading" class="col-4 my-auto">
+                                    <p class="col-8 card-text placeholder-glow">
+                                        <span class="placeholder col-5"></span>
+                                        <span class="placeholder col-10"></span>
+                                        <span class="placeholder col-4"></span>
+                                        <span class="placeholder col-12"></span>
+                                        <span class="placeholder col-9"></span>
+                                        <br>
+                                        <span class="spinner-border spinner-border-lg float-end" role="status" aria-hidden="true"></span>
+                                    </p>
                                 </div>
                                 <div class="card-footer">
-                                    <p>Employed since: 2000-05-15</p>
+                                    <p class="card-text placeholder-glow">Employed since:&nbsp; <span class="placeholder col-4"></span></p>
                                 </div>
-                            </div>
-                    </div>
-                    <div class="col-lg-6 d-none d-lg-block">
-                        <div class="card">
-                            <div class="card-header">
-                                <p>Jason Bourne</p>
-                            </div>
-                            <div class="card-body row">
-                                <img src="assets/apo2.jpg" alt="Jason Bourne" class="col-4 my-auto">
-                                <p class="col-8">Jason Bourne is a dedicated pharmacist with a passion for patient care. He has a strong background in medication management and is committed to providing personalized service to all patients. Jason is known for his friendly demeanor and expert advice, and he is always available to answer questions and address concerns. Patients appreciate his attention to detail and compassionate approach to healthcare.</p>
-                            </div>
-                            <div class="card-footer">
-                                <p>Employed since: 2005-10-01</p>
-                            </div>
+                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 d-none">
-                        <div class="card">
-                            <div class="card-header">
-                                <p>Ethan Hunt</p>
-                            </div>
-                            <div class="card-body row">
-                                <img src="assets/apo5.jpg" alt="Ethan Hunt" class="col-4 my-auto">
-                                <p class="col-8">Ethan Hunt is a skilled pharmacist with a focus on patient-centered care. He is dedicated to helping patients achieve optimal health outcomes through personalized service and expert advice. Ethan is known for his attention to detail and commitment to patient safety. He is always available to answer questions and provide guidance on medications and wellness.</p>
-                            </div>
-                            <div class="card-footer">
-                                <p>Employed since: 2010-03-20</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 d-none">
-                        <div class="card">
-                            <div class="card-header">
-                                <p>James Bond</p>
-                            </div>
-                            <div class="card-body row">
-                                <img src="assets/apo6.jpg" alt="James Bond" class="col-4 my-auto">
-                                <p class="col-8">James Bond is a dedicated pharmacist with a passion for patient care. He has a strong background in medication management and is committed to providing personalized service to all patients. James is known for his friendly demeanor and expert advice, and he is always available to answer questions and address concerns. Patients appreciate his attention to detail and compassionate approach to healthcare.</p>
-                            </div>
-                            <div class="card-footer">
-                                <p>Employed since: 2015-08-10</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 d-none">
-                        <div class="card">
-                            <div class="card-header">
-                                <p>Sidney Bristow</p>
-                            </div>
-                            <div class="card-body row">
-                                <img src="assets/apo3.jpg" alt="Sidney Bristow" class="col-4 my-auto">
-                                <p class="col-8">Sidney Bristow is a skilled pharmacist with a focus on patient-centered care. She is dedicated to helping patients achieve optimal health outcomes through personalized service and expert advice. Sidney is known for her attention to detail and commitment to patient safety. She is always available to answer questions and provide guidance on medications and wellness.</p>
-                            </div>
-                            <div class="card-footer">
-                                <p>Employed since: 2020-12-05</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 d-none">
-                        <div class="card">
-                            <div class="card-header">
-                                <p>Lana Kane</p>
-                            </div>
-                            <div class="card-body row">
-                                <img src="assets/apo4.jpg" alt="Lana Kane" class="col-4 my-auto">
-                                <p class="col-8">Lana Kane is a dedicated pharmacist with a passion for patient care. She has a strong background in medication management and is committed to providing personalized service to all patients. Lana is known for her friendly demeanor and expert advice, and she is always available to answer questions and address concerns. Patients appreciate her attention to detail and compassionate approach to healthcare.</p>
-                            </div>
-                            <div class="card-footer">
-                                <p>Employed since: 2021-06-30</p>
-                            </div>
-                        </div>
+                       
                     </div>
                     <div class="col-12 g-2">
                         <div>
-                            <nav aria-label="navigation">
-                                <ul class="pagination justify-content-center pagination-sm">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item d-lg-none"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item d-lg-none"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item d-lg-none"><a class="page-link" href="#">6</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                </ul>
+                            <nav aria-label="navigation" id="pharmacists-navigation">
+                                
                             </nav>
                         </div>
                             
@@ -595,7 +529,7 @@
             <h2>Contact</h2>
             <div class="glass-pane w-100">
                 <div class="alert alert-success alert-dismissible fade d-none" role="alert">
-                  <strong>Success!</strong> Your Message is send and you can espect an answer whitin 48 workhours.
+                  <strong>Success!</strong> Your Message is send.Please keep in mind this is a fictional pharmacy, you won't receive an awnser.
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <form action="#" method="post" id="contact-form" class="needs-validation" novalidate>
@@ -607,7 +541,7 @@
                             <label for="from" class="form-label">Your name:</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" name="from" id="from" class="form-control" minlength="3" required>
+                            <input type="text" name="name" id="from" class="form-control" minlength="3" required>
                             <div class="invalid-feedback">Please enter a minimum of 3 characters</div>
                         </div>
                         <div class="col-md-3">

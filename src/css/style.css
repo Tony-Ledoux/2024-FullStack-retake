@@ -34,8 +34,6 @@ body {
     transition: background-color 0.3s ease;
 }
 
-
-
 .navbar .active {
     text-decoration: underline;
     font-family: var(--font-header);
@@ -98,6 +96,7 @@ section:first-child, section:last-child {
      background-image: url('../assets/backdrop2.webp');
 }
 
+/* Welcome Section */
 
 #WelcomeCarousel {
     width: 85%;
@@ -162,6 +161,7 @@ section:first-child, section:last-child {
     padding: 1rem;
 }
 
+/* Services Section */
 
 #Services .card img {
     height: 12rem;
@@ -176,6 +176,8 @@ section:first-child, section:last-child {
     color: var(--tertiary-color);
     text-decoration: none;
 }
+
+/* Products Section */
 
 #ProductAccordion h2 {
     text-decoration: none;
@@ -234,6 +236,54 @@ section:first-child, section:last-child {
 .icon-link-hover:hover i{
     transform: translate3d(0,-.250rem,0);
 }
+
+/* about Section */
+
+#About .card img {
+    height: max-content;
+    object-fit: cover;
+}
+
+#About .pagination {
+    --bs-pagination-color: var(--primary-color);
+    --bs-pagination-border-color: var(--primary-color);
+    --bs-pagination-active-bg:var(--primary-color);
+    --bs-pagination-active-border-color: var(--tertiary-color);
+    --bs-pagination-hover-bg: var(--tertiary-color);
+    --bs-pagination-hover-border-color: var(--tertiary-color);
+    --bs-pagination-hover-color: var(--primary-color);
+    --bs-pagination-focus-bg: var(--tertiary-color);
+    --bs-pagination-focus-border-color: var(--tertiary-color);
+    --bs-pagination-focus-color: whitesmoke;
+    --bs-pagination-focus-box-shadow: 3px 2px 5px var(--tertiary-color);
+}
+#About .pagination-sm {
+    --bs-pagination-border-radius: 10px;
+}
+.ribbon {
+    position: absolute;
+    background-color: red;
+    right: 10px;
+    top: 10px;
+    z-index: 1;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    padding: 0.5rem;
+    text-align: center;
+    border : solid 3px var(--primary-color);
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 3px 2px 5px var(--tertiary-color);
+    transform: rotate(15deg);
+}
+
+#About .spinner-border {
+    color: var(--primary-color);
+}
+
+/* Contact Section */
 
 #Contact #message {
     height: 10rem;
@@ -305,45 +355,8 @@ section:first-child, section:last-child {
     box-shadow: inset 2px 1px 5px var(--primary-color);
 }
 
-#About .card img {
-    height: 200px;
-    object-fit: cover;
-}
 
-#About .pagination {
-    --bs-pagination-color: var(--primary-color);
-    --bs-pagination-border-color: var(--primary-color);
-    --bs-pagination-active-bg:var(--primary-color);
-    --bs-pagination-active-border-color: var(--tertiary-color);
-    --bs-pagination-hover-bg: var(--tertiary-color);
-    --bs-pagination-hover-border-color: var(--tertiary-color);
-    --bs-pagination-hover-color: var(--primary-color);
-    --bs-pagination-focus-bg: var(--tertiary-color);
-    --bs-pagination-focus-border-color: var(--tertiary-color);
-    --bs-pagination-focus-color: whitesmoke;
-    --bs-pagination-focus-box-shadow: 3px 2px 5px var(--tertiary-color);
-}
-#About .pagination-sm {
-    --bs-pagination-border-radius: 10px;
-}
-.ribbon {
-    position: absolute;
-    background-color: red;
-    right: 10px;
-    top: 10px;
-    z-index: 1;
-    overflow: hidden;
-    width: auto;
-    height: auto;
-    padding: 0.5rem;
-    text-align: center;
-    border : solid 3px var(--primary-color);
-    border-radius: 10px;
-    border-top-left-radius: 0;
-    border-bottom-right-radius: 0;
-    box-shadow: 3px 2px 5px var(--tertiary-color);
-    transform: rotate(15deg);
-}
+
 
 #controlBtn {
 float: right;

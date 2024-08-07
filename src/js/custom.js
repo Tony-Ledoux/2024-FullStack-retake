@@ -1,6 +1,12 @@
 // Author: Tony Ledoux R0982634
 // Created: 2024-07-06
 
+// if host is localhost, use the local api url else use the production api url
+let apiUrl = "https://2024-fullstack-retake-api-tony-ledouxs-projects.vercel.app/";
+if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    apiUrl = "http://localhost:8080";
+}
+
 let navClicked = false;
 
 function getNavbarHeight() {
@@ -12,18 +18,112 @@ function getNavbarHeight() {
 // Things to do when the page is loaded
 document.addEventListener("DOMContentLoaded", function() {
     const myModal = new bootstrap.Modal(document.getElementById("fictional"));
-    //myModal.show();
+    myModal.show();
 
     // if scrollY is greater than 0, add the navbar-scrolled class to the navbar
     const navbar = document.getElementById("main_navigation");
     if (window.scrollY > 0) {
         navbar.classList.add("navbar-scrolled");
     }
+
     // add padding to the first section to account for the navbar height
     const sections = document.getElementsByTagName("section");
     sections[0].style.paddingTop = getNavbarHeight() + "px";
-});
 
+    // load the pharmacist data from the server
+     const pharmacistPlaceholder = document.getElementById("team-cards-placeholder");
+     const pharmacistNavigation = document.getElementById("pharmacists-navigation");
+    fetch(apiUrl + "/pharmacists/")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        }).then((data) => {
+            console.log(data);
+            // remove the loading card
+            pharmacistPlaceholder.innerHTML = "";
+            pharmacistNavigation.innerHTML = "";
+            // create an empty array for the pagination Elements
+            const pgElements = [];
+            // add the pharmacist data to the page
+            for (let i = 0; i < data.length; i++) {
+                const pharmacist = data[i];
+                const pharmacistCard = document.createElement("div");
+                pharmacistCard.classList.add("col-lg-6");
+                if (i != 0){
+                    pharmacistCard.classList.add("d-none")
+                }
+                if (i==1){
+                    pharmacistCard.classList.add('d-lg-block')
+                }
+                pharmacistCard.innerHTML = 
+                    `<div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="card-title">${pharmacist.name}</h5>
+                        </div>
+                        <div class="card-body row">
+                            <img src="${pharmacist.image}" class="col-4 my-auto" alt="...">
+                            <p class="col-8 card-text">${pharmacist.description}</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text">Employed since: ${pharmacist.start_date}</p>
+                        </div>
+                    </div>`;
+                pharmacistPlaceholder.appendChild(pharmacistCard);
+                pgElem = createPaginationLink(i+1,"#")
+                pgElements.push(pgElem)
+                // set pagination because all is loaded
+            }
+            //if viewport is large display half of the items
+            const p_html = document.createElement("ul")
+            p_html.classList.add("pagination", "justify-content-center", "pagination-sm")
+            let link = createPaginationLink("Previous", "#")
+            link.addEventListener("click",clickOnpaginationLink)
+            p_html.appendChild(link)
+            const elemLength = pgElements.length
+            const elemHalf = elemLength/2
+            console.log(elemHalf)
+            const isHalf_even = (elemLength % 2 == 0)
+            console.log(isHalf_even)
+            for (let i=0; i < pgElements.length ;i++){
+                link = pgElements[i]
+                link.addEventListener("click",clickOnpaginationLink)
+                //if viewport is lg hide above half
+                // if (isBreakpointActive && i+1 > elemHalf){
+                //     link.classList.add("d-lg-none")
+                // }
+                p_html.appendChild(link)
+            }
+            link = createPaginationLink("Next", "#");
+            link.addEventListener("click",clickOnpaginationLink)
+            p_html.appendChild(link)
+            pharmacistNavigation.appendChild(p_html)
+        }).catch((error) => {
+            console.error("Error:", error);
+            // clear the loading card and add an alert
+            pharmacistPlaceholder.innerHTML='';
+            pharmacistNavigation.innerHTML='';
+            const errorData = document.createElement("div")
+            errorData.classList.add("alert","alert-danger","w-75", "mx-auto" , "text-center")
+            errorData.innerHTML= "Error loading our pharmacists <br> try to reload"
+            pharmacistPlaceholder.appendChild(errorData)
+            
+        });
+});
+//createPagination Link
+function createPaginationLink(name, href){
+    //li
+    const el = document.createElement("li")
+    el.classList.add("page-item")
+    const link = document.createElement("a")
+    link.classList.add("page-link")
+    link.href=href
+    link.innerHTML=name
+    el.appendChild(link)
+    return el
+
+}
 // add event listener for the scroll event to change the background color of the navbar when scrolling
 document.addEventListener("scroll", function() {
     const navbar = document.getElementById("main_navigation");
@@ -127,6 +227,7 @@ datePicker.addEventListener("change", function() {
 });
 
 //About section
+
 function isBreakpointActive(breakpoint) {
     // Create a temporary element
     var tempElement = document.createElement("div");
@@ -141,122 +242,81 @@ function isBreakpointActive(breakpoint) {
 
     return isActive;
 }    
+function getAllCards(){
+    const cards = document.querySelectorAll("#team-cards-placeholder .col-lg-6");
+    return cards
+}
 
-
-    function hideCards(Cards) {
-        for (let i = 0; i < Cards.length; i++) {
-            const card = Cards[i];
-            if (!card.classList.contains("d-none")) {
-                card.classList.add("d-none");
-            }
-            card.classList.remove("d-lg-block");
-        }
+function clickOnpaginationLink(event){
+    event.preventDefault()
+    event.stopPropagation()
+    //get all cards
+    const cards = getAllCards()
+    // return the index of the element without d-none
+    const getActiveCard = getActiveCardIndex(cards)
+    let index = 0
+    let lScreen = isBreakpointActive()
+    // hide all the cards
+    hideAllCards()
+    // Action
+    switch(event.target.innerHTML){
+        case "Next":
+            index = getActiveCard + 1
+            break;
+        case "Previous":
+            index = getActiveCard - 1;
+            break;
+        default:
+            index = parseInt(event.target.innerHTML)-1
+            break;
     }
-
-    function showCard(Cards, index) {
-        const card = Cards[index];
-        if (card.classList.contains("d-none")) {
-            card.classList.remove("d-none");
-        }
-        let next = index + 1;
-        if (next >= Cards.length) {
-            next = 0;
-        }
-        const nextCard = Cards[next];
-        nextCard.classList.add("d-lg-block");
+    // check if the index is out of bounds, cant' be less than 0 and more than the length of the cards
+    if(index < 0){
+        index = cards.length - 1
     }
-
-    let activeCard = 0;
-
-    const Cards = document.querySelectorAll("#About .col-lg-6 ");
-    console.log(Cards);
-  // disable nav links with event listener
-    const aboutLinks = document.querySelectorAll("#About nav li");
-    for (let i = 0; i < aboutLinks.length; i++) {
-        aboutLinks[i].addEventListener("click", function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            const action = event.target.innerHTML;
-            console.log(action);
-            hideCards(Cards);
-            // clear the active class from all the nav links
-            for (let j = 0; j < aboutLinks.length; j++) {
-                aboutLinks[j].classList.remove("active");
-            }
-            switch (action) {
-                case "Previous":
-                    if (isBreakpointActive("lg")) {
-                        activeCard -= 2;
-                        // if card is less than 0, set it to the last card index
-                        if (activeCard < 0) {
-                            activeCard = Cards.length - 2;
-                        }
-                    }else{
-                        activeCard -= 1;
-                        // if card is less than 0, set it to the last card index
-                        if (activeCard < 0) {
-                            activeCard = Cards.length - 1;
-                        }
-                    } 
-                    break;
-                case "Next":
-                    if (isBreakpointActive("lg")) {
-                        activeCard += 2;
-                    } else {
-                        activeCard += 1; // if 2 cards visible, activeCard -= 2
-                    }
-                    // if card is greater than the last card index, set it to 0
-                    if (activeCard >= Cards.length) {
-                        activeCard = 0;
-                    } 
-                    break;
-                default:
-                    if (isBreakpointActive("lg")) {
-                        switch (action) {
-                            case "1":
-                                activeCard = 0;
-                                break;
-                            case "2":
-                                activeCard = 2;
-                                break;
-                            case "3":
-                                activeCard = 4;
-                                break;
-                        }
-                    } else {
-                        activeCard = parseInt(action) - 1;
-                    }
-                    if (activeCard >= Cards.length) {
-                        activeCard = 0;
-                    }
-                    if (activeCard < 0) {
-                        activeCard = Cards.length - 1;
-                    }
-                    
-                    
-                    break;
-            }
-            showCard(Cards, activeCard);
-            if(!isBreakpointActive("lg")){
-                aboutLinks[activeCard+1].classList.add("active");
-            }else{
-                if(activeCard == 0 || activeCard == 1){
-                    aboutLinks[1].classList.add("active");
-                }
-                if(activeCard == 2 || activeCard == 3){
-                    aboutLinks[2].classList.add("active");
-                }
-                if(activeCard == 4 || activeCard == 5){
-                    aboutLinks[3].classList.add("active");
-                }
-               console.log(activeCard);
-               //aboutLinks[activeCard/2+1].classList.add("active");
-            }
-            //remove focus from the clicked link
-            event.target.blur();
-        });
+    if(index >= cards.length){
+        index = 0
     }
     
+    showCard(index)
+    // remove the active class
+    event.target.blur()
+}
+
+
+function getActiveCardIndex(cards){
+    for (let i = 0 ; i < cards.length;i++){
+        if(!cards[i].classList.contains("d-none")){
+            return i
+        }
+    }
+    return -1
+}
+
+function hideAllCards(){
+    const cards = getAllCards()
+    for (let i=0; i < cards.length; i++){
+        cards[i].classList.add('d-none')
+        cards[i].classList.remove('d-lg-block')
+    }
+}
+
+function showCard(index=0){
+    const cards = getAllCards()
+    const numberOfCards = cards.length
+    let nextIndex = index + 1
+    if(index > numberOfCards){
+        index = 0
+        nextIndex = 1
+    }
+    if(nextIndex >= numberOfCards){
+        nextIndex = 0
+    }
+    cards[index].classList.remove("d-none")
+    // add d-lg-block to the next card
+    cards[nextIndex].classList.add("d-lg-block")
+}
+
 
 
 
@@ -298,29 +358,54 @@ messageInput.addEventListener("input", function() {
         messageCount.classList.remove("text-danger");
     }
 });
-// stop form subission if not valid
-(() => {
-    "use strict";
+// submit event listener for the contact form
+contactForm.addEventListener("submit", async function(event) {
+    const successAlert = document.querySelector("#Contact .alert-success");
+    console.log(successAlert);
+    event.preventDefault();
+    if (!contactForm.checkValidity()) {
+        event.stopPropagation();
+        contactForm.classList.add("was-validated");
+        return;
+    }
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll(".needs-validation");
-
-    // Loop over them and prevent submission
-    Array.from(forms).forEach((form) => {
-        form.addEventListener(
-            "submit",
-            (event) => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-
-                form.classList.add("was-validated");
-            },
-            false
-        );
+    const formData = new FormData(contactForm);
+    const formObject = {};
+    formData.forEach((value, key) => {
+        formObject[key] = value;
     });
-})();
+    console.log(formObject);
+    // send the form data to the server
+    let posted = await fetch(apiUrl + "/questions/",
+        {
+            method: "POST",
+            body: JSON.stringify(formObject),
+            headers: {
+                "Content-Type": "application/json"
+            }
+    }
+    ).then((response) => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        return response.json();
+    }).then((data) => {
+        console.log(data);
+    }).catch((error) => {
+        console.error("Error:", error);
+    });
+    // if the server returns a success message, show a success message to the user
+    successAlert.classList.remove("d-none");
+    successAlert.classList.add("show");
+    // if the server returns an error message, show an error message to the user
+    // if the server returns a validation error, show the validation error to the user
+    // remove the vallidations from the form
+    contactForm.classList.remove("was-validated");
+    // reset the form
+    contactForm.reset();
+
+});
+
 
 function isLoggedIn() {
     // if there is a token in session storage, return true else return false
@@ -337,5 +422,29 @@ offcanvas.addEventListener("show.bs.offcanvas", function(event) {
         // show the login modal
         const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
         loginModal.show();
+        return;
     }
+    // fetch questions from the server
+    fetch(apiUrl + "/questions/")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        }).then((data) => {
+            console.log(data);
+            // add the questions to the offcanvas
+            const questionList = document.getElementById("q_placeholder");
+            questionList.innerHTML = "";
+            for (let i = 0; i < data.length; i++) {
+                const question = data[i];
+                const questionItem = document.createElement("li");
+                questionItem.classList.add("list-group-item");
+                questionItem.innerHTML = 
+                    "recieved:" + question.received +"<br>from:" + question.from +" <br>message:" + question.question;
+                questionList.appendChild(questionItem);
+            }
+        }).catch((error) => {
+            console.error("Error:", error);
+        });
 });
