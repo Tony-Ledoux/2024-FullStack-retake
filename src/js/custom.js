@@ -2,7 +2,7 @@
 // Created: 2024-07-06
 
 // if host is localhost, use the local api url else use the production api url
-let apiUrl = "https://2024-fullstack-retake-api-tony-ledouxs-projects.vercel.app/";
+let apiUrl = "https://2024-fullstack-retake-api-tony-ledouxs-projects.vercel.app";
 if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
     apiUrl = "http://localhost:8080";
 }
