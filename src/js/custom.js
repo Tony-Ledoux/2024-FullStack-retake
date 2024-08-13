@@ -1,6 +1,8 @@
 // Author: Tony Ledoux R0982634
 // Created: 2024-07-06
 
+//continue from line 240
+
 // if host is localhost, use the local api url else use the production api url
 let apiUrl = "https://2024-fullstack-retake-api-tony-ledouxs-projects.vercel.app";
 if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
@@ -207,23 +209,168 @@ document.addEventListener("scroll", function(event) {
 // add event linster for date-picker change
 const datePicker = document.getElementById("date-picker");
 datePicker.addEventListener("change", function() {
-    const selectedDate = datePicker.value;
-    //if date is 2 weeks from now appointments cannot be made
-    const date = new Date(selectedDate);
-    const today = new Date();
-    const twoWeeks = new Date(today);
-    twoWeeks.setDate(today.getDate() + 14);
-    if (date > twoWeeks) {
-        //alert the user that appointments cannot be made more than 2 weeks in advance
-        // show no appointments available
+    const booking_Error = document.getElementById("alert_booking");
+    const consultant_placeholder = document.getElementById("consultants");
+    const itemPlaceholder = consultant_placeholder.querySelector(".consultant-placeholder");
+    try {
+        const selectedDate = datePicker.value;
+        const date = new Date(selectedDate);
+        const today = new Date();
+        if (date < today) {
+            throw new Error("Date must be in the future");
+        }
+        booking_Error.classList.add("d-none");
+        consultant_placeholder.classList.remove("d-none");
+        // fetch the data from the server
+        fetch(apiUrl + "/appointment?date=" + selectedDate)
+            .then((response) => {
+                console.log(response);
+                if (response.ok) {
+                    return response.json();
+                }
+                if (response.status == 400) {
+                    throw new Error("Bad date format");
+                }
+                if (response.status == 404) {
+                    throw new Error("Pharmacy is closed on this date");
+                }
+                throw new Error("Network response was not ok");
+            }).then((data) => {
+                console.log(data);
+                itemPlaceholder.innerHTML = "";
+                for (let i = 0; i < data.length; i++) {
+                    const consultant = data[i];
+                    const consultantItem = document.createElement("div");
+                    consultantItem.classList.add("form-check");
+                    consultantItem.innerHTML = 
+                        `<input class="form-check-input" type="radio" name="consultant" id="consultant${i}" value="${consultant.pharmacist_id}">
+                        <label class="form-check-label" for="consultant${i}">` + consultant.pharmacist + "</label>";
+                    consultantItem.addEventListener("change", function(event) {
+                        //load available times for the selected consultant
+                        const consultantId = event.target.value;
+                        // get the selected consultant from the data
+                        const selectedConsultant = data.find((consultant) => consultant.pharmacist_id == consultantId);
+                        // clear previous slots
+
+                        // display new time slots
+                        showAvailableTimes(selectedConsultant);
+                    });
+                    itemPlaceholder.appendChild(consultantItem);
+                }
+            }).catch((error) => {
+                console.error("Error:", error);
+                datePicker.value = "";
+                // if typeError, show the error message for no network
+                if (error instanceof TypeError) {
+                    booking_Error.innerHTML = "Network error, please try again later";
+                    //clear the consultant placeholder
+                }
+                if (error.message === "Bad date format") {
+                    booking_Error.innerHTML = "Please select a valid date";
+                }
+                if (error.message === "Pharmacy is closed on this date") {
+                    booking_Error.innerHTML = error.message;
+                }
+                booking_Error.classList.remove("d-none");
+                consultant_placeholder.classList.add("d-none");
+                itemPlaceholder.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+        });
+    } catch (error) {
+        datePicker.value = "";
+        if (error.message === "Date must be in the future") {
+            booking_Error.innerHTML = error.message;
+        }
+        booking_Error.classList.remove("d-none");
+        consultant_placeholder.classList.add("d-none");
+        itemPlaceholder.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+        console.error("Error:", error);
     }
-    //if date is on a sunday we are closed
-    if (date.getDay() === 0) {
-        //alert the user that we are closed on sundays
-        // show no appointments available
-        
+});
+// show available times for the selected consultant
+function showAvailableTimes(times) {
+    const timeslot_form = document.getElementById("form_slots");
+    timeslot_form.classList.remove("d-none");
+    const appointmentForm = document.getElementById("book_appointment_with_selected_consultant");
+    appointmentForm.reset();
+    // reset the alert
+    const errorAlert = document.getElementById("alert_no_timeslot");
+    errorAlert.classList.add("d-none");
+    errorAlert.classList.remove("show");
+    // set the value of the hidden input date to the selected date
+    appointmentForm.querySelector("input[name='date']").value = datePicker.value;
+    appointmentForm.querySelector("input[name='consultant_id']").value = times.pharmacist_id;
+    // create a list of available times in the morning and afternoon
+    const morningTimes = []
+    const afternoonTimes = []
+    for(let i=0; i < times.timeslots.length; i++){
+        const timeslot = times.timeslots[i];
+        if(timeslot.day_part === "morning"){
+            morningTimes.push(timeslot);
+        }
+        if(timeslot.day_part === "afternoon"){
+            afternoonTimes.push(timeslot);
+        }
     }
-    console.log(selectedDate);
+    console.log(morningTimes);
+    // clear the previous times
+    const morningPlaceholder = document.getElementById("morning_consult");
+    morningPlaceholder.innerHTML = "<h5>Morning</h5>";
+    const afternoonPlaceholder = document.getElementById("afternoon_consult");
+    afternoonPlaceholder.innerHTML = "<h5>Afternoon</h5>";
+    // create a radio button for each time in the morning array and append it to the morningPlaceholder
+    for (let i = 0; i < morningTimes.length; i++) {
+        const time = morningTimes[i];
+        const timeItem = document.createElement("div");
+        timeItem.classList.add("d-inline-block");
+        timeItem.innerHTML = `<input class="btn-check" type="radio" name="time" id="time${time.slot_id}" value="${time.slot_id}">
+            <label class="btn btn-secondary" for="time${time.slot_id}">${time.timeslot}</label>`;
+        morningPlaceholder.appendChild(timeItem);
+    }
+    // create a radio button for each time in the afternoon array and append it to the afternoonPlaceholder
+    for (let i = 0; i < afternoonTimes.length; i++) {
+        const time = afternoonTimes[i];
+        const timeItem = document.createElement("div");
+        timeItem.classList.add("d-inline-block");
+        timeItem.innerHTML = `<input class="btn-check" type="radio" name="time" id="time${time.slot_id}" value="${time.slot_id}">
+            <label class="btn btn-secondary" for="time${time.slot_id}">${time.timeslot}</label>`;
+        afternoonPlaceholder.appendChild(timeItem);
+    }
+
+   console.log(times);
+}
+// submit function for the appointment form
+const appointmentForm = document.getElementById("book_appointment_with_selected_consultant");
+appointmentForm.addEventListener("submit", function(event) {
+    const form = document.getElementById("form_slots");
+    const consultant_placeholder = document.getElementById("consultants");
+    const successAlert = document.getElementById("alert_booking_successfull");
+    event.preventDefault();
+    event.stopPropagation();
+    // get the form data
+    const formData = new FormData(appointmentForm);
+    const formObject = {};
+    formData.forEach((value, key) => {
+        formObject[key] = value;
+    });
+    console.log(formObject);
+    // if formObject does not contain a time, show an error message
+    if (!formObject.time) {
+        const errorAlert = document.getElementById("alert_no_timeslot");
+        errorAlert.classList.remove("d-none");
+        errorAlert.classList.add("show");
+        return;
+    }
+    // clear the form
+    appointmentForm.reset();
+    // reset the date picker and hide the form and consultants
+    datePicker.value = "";
+    form.classList.add("d-none");
+    consultant_placeholder.classList.add("d-none");
+    successAlert.classList.remove("d-none");
+    setTimeout(function() {
+        successAlert.classList.add("d-none");
+    }, 5000);
+
 });
 
 //About section

@@ -435,44 +435,48 @@
                     </ul>
                 <p>Book your consultation today and take the first step towards better health.</p>
                 <div class="row">
+                    <div class="alert alert-danger d-none" id="alert_booking"></div>
+                    <div class="alert alert-success d-none" id="alert_booking_successfull">Your appointment is made.</div>
                     <div class="col-md-6">
                         <label for="date-picker">Pick a date:</label>
                         <br>
                         <input type="date" name="date-consult" id="date-picker">
                     </div>
                     <div class="col-md-6" id="consuntant-container">
-                        <div id="consultants">
+                        <div id="consultants" class="d-none">
                             <!-- This data will be dynamicly got from db -->
                             <p>Choose a consultant:</p>
-                            <div class="form-check">
-                                <input type="radio" name="consultant" id="option1" value="Jack Ryan" class="form-check-input">
-                                <label for="option1" class="form-check-label">Jack Ryan</label>&nbsp;
-                                <a class="icon-link icon-link-hover" href="#About"><i class="fa-solid fa-question" aria-hidden="true"></i>Get more info</a>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" name="consultant" id="option2" value="Jason Bourne" class="form-check-input">
-                                <label for="option2" class="form-check-label">Jason Bourne</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" name="consultant" id="option3" value="Ethan Hunt" class="form-check-input">
-                                <label for="option3" class="form-check-label">Ethan Hunt</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" name="consultant" id="option4" value="James Bond" class="form-check-input">
-                                <label for="option4" class="form-check-label">James Bond</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" name="consultant" id="option5" value="Sidney Bristow" class="form-check-input">
-                                <label for="option5" class="form-check-label">Sidney Bristow</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="radio" name="consultant" id="option6" value="Lana Kane" class="form-check-input">
-                                <label for="option6" class="form-check-label">Lana Kane</label>
+                            <div class="consultant-placeholder">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <h4>Available slots</h4>
+                    <div class="col-12 d-none" id="form_slots">
+                        <h4 class="text-center">Available slots</h4>
+                        <form action="#" method="post" id="book_appointment_with_selected_consultant">
+                            <input type="hidden" name="date">
+                            <input type="hidden" name="consultant_id">
+                            <div class="row g-3 text-center">
+                                <div class="col-md-4">
+                                    <label for="customer" class="form-label">Enter your name:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="customer" id="customer" required>
+                                </div>
+                                <div class="col-md-6" id="morning_consult"></div>
+                                <div class="col-md-6" id="afternoon_consult">
+                                    
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning alert-dismissible fade d-none" role="alert" id="alert_no_timeslot">
+                                        <strong>Incomplete Form</strong> Please select a timeslot.
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Book your consult</button>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

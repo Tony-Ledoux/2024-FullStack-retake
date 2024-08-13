@@ -363,4 +363,8 @@ float: right;
 clear: both;
 }
 
+#book_appointment_with_selected_consultant .btn-secondary {
+ margin: 0.25rem;
+ width: 10rem;
+}
 
