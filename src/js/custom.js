@@ -18,7 +18,7 @@ function getNavbarHeight() {
 }
 
 // Things to do when the page is loaded
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const myModal = new bootstrap.Modal(document.getElementById("fictional"));
     myModal.show();
 
@@ -33,16 +33,16 @@ document.addEventListener("DOMContentLoaded", function() {
     sections[0].style.paddingTop = getNavbarHeight() + "px";
 
     // load the pharmacist data from the server
-     const pharmacistPlaceholder = document.getElementById("team-cards-placeholder");
-     const pharmacistNavigation = document.getElementById("pharmacists-navigation");
+    const pharmacistPlaceholder = document.getElementById("team-cards-placeholder");
+    const pharmacistNavigation = document.getElementById("pharmacists-navigation");
     fetch(apiUrl + "/pharmacists/")
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
             return response.json();
-        }).then((data) => {
-            console.log(data);
+        })
+        .then((data) => {
             // remove the loading card
             pharmacistPlaceholder.innerHTML = "";
             pharmacistNavigation.innerHTML = "";
@@ -53,14 +53,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 const pharmacist = data[i];
                 const pharmacistCard = document.createElement("div");
                 pharmacistCard.classList.add("col-lg-6");
-                if (i != 0){
-                    pharmacistCard.classList.add("d-none")
+                if (i != 0) {
+                    pharmacistCard.classList.add("d-none");
                 }
-                if (i==1){
-                    pharmacistCard.classList.add('d-lg-block')
+                if (i == 1) {
+                    pharmacistCard.classList.add("d-lg-block");
                 }
-                pharmacistCard.innerHTML = 
-                    `<div class="card h-100">
+                pharmacistCard.innerHTML = `<div class="card h-100">
                         <div class="card-header">
                             <h5 class="card-title text-center">${pharmacist.name}</h5>
                         </div>
@@ -73,61 +72,52 @@ document.addEventListener("DOMContentLoaded", function() {
                         </div>
                     </div>`;
                 pharmacistPlaceholder.appendChild(pharmacistCard);
-                pgElem = createPaginationLink(i+1,"#")
-                pgElements.push(pgElem)
+                pgElem = createPaginationLink(i + 1, "#");
+                pgElements.push(pgElem);
                 // set pagination because all is loaded
             }
             //if viewport is large display half of the items
-            const p_html = document.createElement("ul")
-            p_html.classList.add("pagination", "justify-content-center", "pagination-sm")
-            let link = createPaginationLink("Previous", "#")
-            link.addEventListener("click",clickOnpaginationLink)
-            p_html.appendChild(link)
-            const elemLength = pgElements.length
-            const elemHalf = elemLength/2
-            console.log(elemHalf)
-            const isHalf_even = (elemLength % 2 == 0)
-            console.log(isHalf_even)
-            for (let i=0; i < pgElements.length ;i++){
-                link = pgElements[i]
-                link.addEventListener("click",clickOnpaginationLink)
-                //if viewport is lg hide above half
-                // if (isBreakpointActive && i+1 > elemHalf){
-                //     link.classList.add("d-lg-none")
-                // }
-                p_html.appendChild(link)
+            const p_html = document.createElement("ul");
+            p_html.classList.add("pagination", "justify-content-center", "pagination-sm");
+            let link = createPaginationLink("Previous", "#");
+            link.addEventListener("click", clickOnpaginationLink);
+            p_html.appendChild(link);
+            const elemLength = pgElements.length;
+            for (let i = 0; i < pgElements.length; i++) {
+                link = pgElements[i];
+                link.addEventListener("click", clickOnpaginationLink);
+                p_html.appendChild(link);
             }
             link = createPaginationLink("Next", "#");
-            link.addEventListener("click",clickOnpaginationLink)
-            p_html.appendChild(link)
-            pharmacistNavigation.appendChild(p_html)
-        }).catch((error) => {
+            link.addEventListener("click", clickOnpaginationLink);
+            p_html.appendChild(link);
+            pharmacistNavigation.appendChild(p_html);
+        })
+        .catch((error) => {
             console.error("Error:", error);
             // clear the loading card and add an alert
-            pharmacistPlaceholder.innerHTML='';
-            pharmacistNavigation.innerHTML='';
-            const errorData = document.createElement("div")
-            errorData.classList.add("alert","alert-danger","w-75", "mx-auto" , "text-center")
-            errorData.innerHTML= "Error loading our pharmacists <br> try to reload"
-            pharmacistPlaceholder.appendChild(errorData)
-            
+            pharmacistPlaceholder.innerHTML = "";
+            pharmacistNavigation.innerHTML = "";
+            const errorData = document.createElement("div");
+            errorData.classList.add("alert", "alert-danger", "w-75", "mx-auto", "text-center");
+            errorData.innerHTML = "Error loading our pharmacists <br> try to reload";
+            pharmacistPlaceholder.appendChild(errorData);
         });
 });
 //createPagination Link
-function createPaginationLink(name, href){
+function createPaginationLink(name, href) {
     //li
-    const el = document.createElement("li")
-    el.classList.add("page-item")
-    const link = document.createElement("a")
-    link.classList.add("page-link")
-    link.href=href
-    link.innerHTML=name
-    el.appendChild(link)
-    return el
-
+    const el = document.createElement("li");
+    el.classList.add("page-item");
+    const link = document.createElement("a");
+    link.classList.add("page-link");
+    link.href = href;
+    link.innerHTML = name;
+    el.appendChild(link);
+    return el;
 }
 // add event listener for the scroll event to change the background color of the navbar when scrolling
-document.addEventListener("scroll", function() {
+document.addEventListener("scroll", function () {
     const navbar = document.getElementById("main_navigation");
     if (window.scrollY > 0) {
         navbar.classList.add("navbar-scrolled");
@@ -138,7 +128,7 @@ document.addEventListener("scroll", function() {
 
 // add event listener for the click event on the navbar-toggler button to add the navbar-scrolled class to the navbar when the menu is open
 const toggleButton = document.querySelector("button.navbar-toggler");
-toggleButton.addEventListener("click", function() {
+toggleButton.addEventListener("click", function () {
     const navbar = document.getElementById("main_navigation");
     if (toggleButton.getAttribute("aria-expanded") === "true") {
         navbar.classList.add("navbar-scrolled");
@@ -149,11 +139,10 @@ toggleButton.addEventListener("click", function() {
     }
 });
 
-
 // add event listener to links in the navbar
 const navLinks = document.querySelectorAll("header a.nav-link");
 for (let i = 0; i < navLinks.length; i++) {
-    navLinks[i].addEventListener("click", function(event) {
+    navLinks[i].addEventListener("click", function (event) {
         navClicked = true;
         // prevent the default action
         event.preventDefault();
@@ -168,12 +157,11 @@ for (let i = 0; i < navLinks.length; i++) {
             top: section.offsetTop - getNavbarHeight(),
             behavior: "smooth",
         });
-
     });
 }
 
 const smProdTypeSelector = document.getElementById("small-screen-product-type-selector");
-smProdTypeSelector.addEventListener("change", function() {
+smProdTypeSelector.addEventListener("change", function () {
     // remove the active and show classes from all the product tab-pane divs
     const tabPanes = document.querySelectorAll("#otcProducts .tab-pane");
     for (let i = 0; i < tabPanes.length; i++) {
@@ -187,28 +175,28 @@ smProdTypeSelector.addEventListener("change", function() {
 });
 
 // add event listener to set the active class on the navbar links
-document.addEventListener("scroll", function(event) {
-        const sections = document.getElementsByTagName("section");
-        for (let i = 0; i < sections.length; i++) {
-            const section = sections[i];
-            const sectionTop = section.offsetTop - getNavbarHeight();
-            const sectionBottom = sectionTop + section.offsetHeight;
-            if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-                const sectionId = "#" + section.id;
-                const navLinks = document.querySelectorAll("header a.nav-link");
-                    for (let j = 0; j < navLinks.length; j++) {
-                        navLinks[j].classList.remove("active");
-                        if (navLinks[j].getAttribute("href") === sectionId) {
-                             navLinks[j].classList.add("active");
-                        }
-                    }
+document.addEventListener("scroll", function (event) {
+    const sections = document.getElementsByTagName("section");
+    for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const sectionTop = section.offsetTop - getNavbarHeight();
+        const sectionBottom = sectionTop + section.offsetHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+            const sectionId = "#" + section.id;
+            const navLinks = document.querySelectorAll("header a.nav-link");
+            for (let j = 0; j < navLinks.length; j++) {
+                navLinks[j].classList.remove("active");
+                if (navLinks[j].getAttribute("href") === sectionId) {
+                    navLinks[j].classList.add("active");
+                }
             }
         }
+    }
 });
 
 // add event linster for date-picker change
 const datePicker = document.getElementById("date-picker");
-datePicker.addEventListener("change", function() {
+datePicker.addEventListener("change", function () {
     const booking_Error = document.getElementById("alert_booking");
     const consultant_placeholder = document.getElementById("consultants");
     const itemPlaceholder = consultant_placeholder.querySelector(".consultant-placeholder");
@@ -235,17 +223,20 @@ datePicker.addEventListener("change", function() {
                     throw new Error("Pharmacy is closed on this date");
                 }
                 throw new Error("Network response was not ok");
-            }).then((data) => {
+            })
+            .then((data) => {
                 console.log(data);
                 itemPlaceholder.innerHTML = "";
                 for (let i = 0; i < data.length; i++) {
                     const consultant = data[i];
                     const consultantItem = document.createElement("div");
                     consultantItem.classList.add("form-check");
-                    consultantItem.innerHTML = 
+                    consultantItem.innerHTML =
                         `<input class="form-check-input" type="radio" name="consultant" id="consultant${i}" value="${consultant.pharmacist_id}">
-                        <label class="form-check-label" for="consultant${i}">` + consultant.pharmacist + "</label>";
-                    consultantItem.addEventListener("change", function(event) {
+                        <label class="form-check-label" for="consultant${i}">` +
+                        consultant.pharmacist +
+                        "</label>";
+                    consultantItem.addEventListener("change", function (event) {
                         //load available times for the selected consultant
                         const consultantId = event.target.value;
                         // get the selected consultant from the data
@@ -257,7 +248,8 @@ datePicker.addEventListener("change", function() {
                     });
                     itemPlaceholder.appendChild(consultantItem);
                 }
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 console.error("Error:", error);
                 datePicker.value = "";
                 // if typeError, show the error message for no network
@@ -274,7 +266,7 @@ datePicker.addEventListener("change", function() {
                 booking_Error.classList.remove("d-none");
                 consultant_placeholder.classList.add("d-none");
                 itemPlaceholder.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
-        });
+            });
     } catch (error) {
         datePicker.value = "";
         if (error.message === "Date must be in the future") {
@@ -297,50 +289,54 @@ function showAvailableTimes(times) {
     errorAlert.classList.add("d-none");
     errorAlert.classList.remove("show");
     // set the value of the hidden input date to the selected date
-    appointmentForm.querySelector("input[name='date']").value = datePicker.value;
-    appointmentForm.querySelector("input[name='consultant_id']").value = times.pharmacist_id;
+    appointmentForm.querySelector("input[name='date_value']").value = datePicker.value;
+    appointmentForm.querySelector("input[name='pharmacist_id']").value = times.pharmacist_id;
     // create a list of available times in the morning and afternoon
-    const morningTimes = []
-    const afternoonTimes = []
-    for(let i=0; i < times.timeslots.length; i++){
+    const morningTimes = [];
+    const afternoonTimes = [];
+    for (let i = 0; i < times.timeslots.length; i++) {
         const timeslot = times.timeslots[i];
-        if(timeslot.day_part === "morning"){
+        if (timeslot.day_part === "morning") {
             morningTimes.push(timeslot);
         }
-        if(timeslot.day_part === "afternoon"){
+        if (timeslot.day_part === "afternoon") {
             afternoonTimes.push(timeslot);
         }
     }
-    console.log(morningTimes);
     // clear the previous times
     const morningPlaceholder = document.getElementById("morning_consult");
     morningPlaceholder.innerHTML = "<h5>Morning</h5>";
     const afternoonPlaceholder = document.getElementById("afternoon_consult");
     afternoonPlaceholder.innerHTML = "<h5>Afternoon</h5>";
+    const no_time_available = document.createElement("p");
+    no_time_available.innerHTML = "No time slots available";
     // create a radio button for each time in the morning array and append it to the morningPlaceholder
-    for (let i = 0; i < morningTimes.length; i++) {
-        const time = morningTimes[i];
-        const timeItem = document.createElement("div");
-        timeItem.classList.add("d-inline-block");
-        timeItem.innerHTML = `<input class="btn-check" type="radio" name="time" id="time${time.slot_id}" value="${time.slot_id}">
-            <label class="btn btn-secondary" for="time${time.slot_id}">${time.timeslot}</label>`;
-        morningPlaceholder.appendChild(timeItem);
+    if (morningTimes.length == 0) {
+        morningPlaceholder.appendChild(no_time_available);
+    }else {
+        for (let i = 0; i < morningTimes.length; i++) {
+            const time = morningTimes[i];
+            const timeItem = document.createElement("div");
+            timeItem.classList.add("d-inline-block");
+            timeItem.innerHTML = `<input class="btn-check" type="radio" name="time_slot" id="time${time.slot_id}" value="${time.slot_id}">
+                <label class="btn btn-secondary" for="time${time.slot_id}">${time.timeslot}</label>`;
+            morningPlaceholder.appendChild(timeItem);
+        }
     }
     // create a radio button for each time in the afternoon array and append it to the afternoonPlaceholder
     for (let i = 0; i < afternoonTimes.length; i++) {
         const time = afternoonTimes[i];
         const timeItem = document.createElement("div");
         timeItem.classList.add("d-inline-block");
-        timeItem.innerHTML = `<input class="btn-check" type="radio" name="time" id="time${time.slot_id}" value="${time.slot_id}">
+        timeItem.innerHTML = `<input class="btn-check" type="radio" name="time_slot" id="time${time.slot_id}" value="${time.slot_id}">
             <label class="btn btn-secondary" for="time${time.slot_id}">${time.timeslot}</label>`;
         afternoonPlaceholder.appendChild(timeItem);
     }
 
-   console.log(times);
 }
 // submit function for the appointment form
 const appointmentForm = document.getElementById("book_appointment_with_selected_consultant");
-appointmentForm.addEventListener("submit", function(event) {
+appointmentForm.addEventListener("submit", function (event) {
     const form = document.getElementById("form_slots");
     const consultant_placeholder = document.getElementById("consultants");
     const successAlert = document.getElementById("alert_booking_successfull");
@@ -350,26 +346,62 @@ appointmentForm.addEventListener("submit", function(event) {
     const formData = new FormData(appointmentForm);
     const formObject = {};
     formData.forEach((value, key) => {
+        //if key is pharmacist_id or slot_id, convert the value to a number
+        if (key === "pharmacist_id" || key === "time_slot") {
+            value = parseInt(value);
+        }
         formObject[key] = value;
     });
-    console.log(formObject);
     // if formObject does not contain a time, show an error message
-    if (!formObject.time) {
+    if (!formObject.time_slot) {
         const errorAlert = document.getElementById("alert_no_timeslot");
         errorAlert.classList.remove("d-none");
         errorAlert.classList.add("show");
         return;
     }
-    // clear the form
-    appointmentForm.reset();
-    // reset the date picker and hide the form and consultants
-    datePicker.value = "";
-    form.classList.add("d-none");
-    consultant_placeholder.classList.add("d-none");
-    successAlert.classList.remove("d-none");
-    setTimeout(function() {
-        successAlert.classList.add("d-none");
-    }, 5000);
+    console.log(formObject);
+    // send the form data to the server
+    fetch(apiUrl + "/appointment/", {
+        method: "POST",
+        body: JSON.stringify(formObject),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            // if data containts status 500, show an error message
+            
+            if (data.status_code === 500) {
+                throw new Error(data.detail);
+            }
+            successAlert.classList.remove("d-none");
+            setTimeout(function () {
+                successAlert.classList.add("d-none");
+            }, 5000);
+        })
+        .catch((error) => {
+            const errorAlert = document.getElementById("alert_booking");
+            errorAlert.innerHTML = "Error booking appointment, please try again later";
+            errorAlert.classList.remove("d-none");
+            setTimeout(function () {
+                errorAlert.classList.add("d-none");
+            }, 5000);
+            console.error("Error:", error);
+        }).finally(() => {
+            // clear the form
+            appointmentForm.reset();
+            // reset the date picker and hide the form and consultants
+            datePicker.value = "";
+            form.classList.add("d-none");
+            consultant_placeholder.classList.add("d-none");
+        });
+    
     // TODO: send the form data to the server
 });
 
@@ -388,89 +420,85 @@ function isBreakpointActive(breakpoint) {
     document.body.removeChild(tempElement);
 
     return isActive;
-}    
-function getAllCards(){
+}
+function getAllCards() {
     const cards = document.querySelectorAll("#team-cards-placeholder .col-lg-6");
-    return cards
+    return cards;
 }
 
-function clickOnpaginationLink(event){
-    event.preventDefault()
-    event.stopPropagation()
+function clickOnpaginationLink(event) {
+    event.preventDefault();
+    event.stopPropagation();
     //get all cards
-    const cards = getAllCards()
+    const cards = getAllCards();
     // return the index of the element without d-none
-    const getActiveCard = getActiveCardIndex(cards)
-    let index = 0
-    let lScreen = isBreakpointActive()
+    const getActiveCard = getActiveCardIndex(cards);
+    let index = 0;
+    let lScreen = isBreakpointActive();
     // hide all the cards
-    hideAllCards()
+    hideAllCards();
     // Action
-    switch(event.target.innerHTML){
+    switch (event.target.innerHTML) {
         case "Next":
-            index = getActiveCard + 1
+            index = getActiveCard + 1;
             break;
         case "Previous":
             index = getActiveCard - 1;
             break;
         default:
-            index = parseInt(event.target.innerHTML)-1
+            index = parseInt(event.target.innerHTML) - 1;
             break;
     }
     // check if the index is out of bounds, cant' be less than 0 and more than the length of the cards
-    if(index < 0){
-        index = cards.length - 1
+    if (index < 0) {
+        index = cards.length - 1;
     }
-    if(index >= cards.length){
-        index = 0
+    if (index >= cards.length) {
+        index = 0;
     }
-    
-    showCard(index)
+
+    showCard(index);
     // remove the active class
-    event.target.blur()
+    event.target.blur();
 }
 
-
-function getActiveCardIndex(cards){
-    for (let i = 0 ; i < cards.length;i++){
-        if(!cards[i].classList.contains("d-none")){
-            return i
+function getActiveCardIndex(cards) {
+    for (let i = 0; i < cards.length; i++) {
+        if (!cards[i].classList.contains("d-none")) {
+            return i;
         }
     }
-    return -1
+    return -1;
 }
 
-function hideAllCards(){
-    const cards = getAllCards()
-    for (let i=0; i < cards.length; i++){
-        cards[i].classList.add('d-none')
-        cards[i].classList.remove('d-lg-block')
+function hideAllCards() {
+    const cards = getAllCards();
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].classList.add("d-none");
+        cards[i].classList.remove("d-lg-block");
     }
 }
 
-function showCard(index=0){
-    const cards = getAllCards()
-    const numberOfCards = cards.length
-    let nextIndex = index + 1
-    if(index > numberOfCards){
-        index = 0
-        nextIndex = 1
+function showCard(index = 0) {
+    const cards = getAllCards();
+    const numberOfCards = cards.length;
+    let nextIndex = index + 1;
+    if (index > numberOfCards) {
+        index = 0;
+        nextIndex = 1;
     }
-    if(nextIndex >= numberOfCards){
-        nextIndex = 0
+    if (nextIndex >= numberOfCards) {
+        nextIndex = 0;
     }
-    cards[index].classList.remove("d-none")
+    cards[index].classList.remove("d-none");
     // add d-lg-block to the next card
-    cards[nextIndex].classList.add("d-lg-block")
+    cards[nextIndex].classList.add("d-lg-block");
 }
-
-
-
 
 // add event listener for the contact form progress bar
 const contactForm = document.getElementById("contact-form");
 const contactSubmit = contactForm.querySelector("button[type='submit']");
-contactForm.addEventListener("change", function() {
+contactForm.addEventListener("change", function () {
     const progressBar = document.getElementById("progress-bar");
     const inputs = document.querySelectorAll("#contact-form input, #contact-form textarea");
     let progress = 0;
@@ -493,22 +521,20 @@ contactForm.addEventListener("change", function() {
 
 // event listener for keypress on message input
 const messageInput = document.getElementById("message");
-messageInput.addEventListener("input", function() {
+messageInput.addEventListener("input", function () {
     const message = messageInput.value;
     const messageLength = message.length;
-    console.log(message,messageLength);
     const messageCount = document.getElementById("message-counter");
-    messageCount.innerHTML = messageLength+"/" + messageInput.maxLength;
-    if (messageLength  <messageInput.minLength || messageLength > messageInput.maxLength) {
+    messageCount.innerHTML = messageLength + "/" + messageInput.maxLength;
+    if (messageLength < messageInput.minLength || messageLength > messageInput.maxLength) {
         messageCount.classList.add("text-danger");
     } else {
         messageCount.classList.remove("text-danger");
     }
 });
 // submit event listener for the contact form
-contactForm.addEventListener("submit", async function(event) {
+contactForm.addEventListener("submit", async function (event) {
     const successAlert = document.querySelector("#Contact .alert-success");
-    console.log(successAlert);
     event.preventDefault();
     if (!contactForm.checkValidity()) {
         event.stopPropagation();
@@ -523,24 +549,25 @@ contactForm.addEventListener("submit", async function(event) {
     });
     console.log(formObject);
     // send the form data to the server
-    let posted = await fetch(apiUrl + "/questions/",
-        {
-            method: "POST",
-            body: JSON.stringify(formObject),
-            headers: {
-                "Content-Type": "application/json"
+    let posted = await fetch(apiUrl + "/questions/", {
+        method: "POST",
+        body: JSON.stringify(formObject),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
             }
-    }
-    ).then((response) => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
-        }
-        return response.json();
-    }).then((data) => {
-        console.log(data);
-    }).catch((error) => {
-        console.error("Error:", error);
-    });
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
     // if the server returns a success message, show a success message to the user
     successAlert.classList.remove("d-none");
     successAlert.classList.add("show");
@@ -550,18 +577,16 @@ contactForm.addEventListener("submit", async function(event) {
     contactForm.classList.remove("was-validated");
     // reset the form
     contactForm.reset();
-
 });
 
-
 function isLoggedIn() {
-    // if there is a token in session storage, return true else return false
+    // if there is a token in session storage, check if it is valid
     return true; // change to true if logged in
 }
 
 // on opening of the offcanvas, check if logged in
 const offcanvas = document.getElementById("controlPanel");
-offcanvas.addEventListener("show.bs.offcanvas", function(event) {
+offcanvas.addEventListener("show.bs.offcanvas", function (event) {
     const loggedIn = isLoggedIn();
     if (!loggedIn) {
         // prevent the offcanvas from opening
@@ -578,7 +603,8 @@ offcanvas.addEventListener("show.bs.offcanvas", function(event) {
                 throw new Error("Network response was not ok");
             }
             return response.json();
-        }).then((data) => {
+        })
+        .then((data) => {
             console.log(data);
             // add the questions to the offcanvas
             const questionList = document.getElementById("q_placeholder");
@@ -587,11 +613,12 @@ offcanvas.addEventListener("show.bs.offcanvas", function(event) {
                 const question = data[i];
                 const questionItem = document.createElement("li");
                 questionItem.classList.add("list-group-item");
-                questionItem.innerHTML = 
-                    "recieved:" + question.received +"<br>from:" + question.from +" <br>message:" + question.question;
+                questionItem.innerHTML =
+                    "recieved:" + question.received + "<br>from:" + question.from + " <br>message:" + question.question;
                 questionList.appendChild(questionItem);
             }
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.error("Error:", error);
         });
 });
