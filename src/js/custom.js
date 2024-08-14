@@ -62,11 +62,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 pharmacistCard.innerHTML = 
                     `<div class="card h-100">
                         <div class="card-header">
-                            <h5 class="card-title">${pharmacist.name}</h5>
+                            <h5 class="card-title text-center">${pharmacist.name}</h5>
                         </div>
                         <div class="card-body row">
-                            <img src="${pharmacist.image}" class="col-4 my-auto" alt="...">
-                            <p class="col-8 card-text">${pharmacist.description}</p>
+                            <img src="${pharmacist.image}" class="col-md-4 my-auto" alt="...">
+                            <p class="col-md-8 card-text">${pharmacist.description}</p>
                         </div>
                         <div class="card-footer">
                             <p class="card-text">Employed since: ${pharmacist.start_date}</p>
@@ -370,7 +370,7 @@ appointmentForm.addEventListener("submit", function(event) {
     setTimeout(function() {
         successAlert.classList.add("d-none");
     }, 5000);
-
+    // TODO: send the form data to the server
 });
 
 //About section
