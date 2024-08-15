@@ -785,11 +785,10 @@ collapseThree.addEventListener("show.bs.collapse", function (event) {
                 delete formObject["afternoon"];
                 // send the form data to the server
                 fetch(apiUrl + "/config/pharmacists", {
-                    method: "POST",
+                    method: "PUT",
                     body: JSON.stringify(formObject),
                     headers: {
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
                     },
                 }).then((response) => {
                     if (!response.ok) {
