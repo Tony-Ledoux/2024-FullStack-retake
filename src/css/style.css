@@ -410,3 +410,32 @@ input[type="date"]:focus {
     object-fit: cover;
     object-position: top;
 }
+
+.accordion-item {
+    background-color: var(--primary-background-color);
+    border: solid 3px var(--primary-color);
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0; 
+    box-shadow: 3px 2px 5px var(--tertiary-color);
+}
+
+.accordion-button {
+    background-color: var(--primary-color);
+    color: whitesmoke;
+}
+.accordion-button:not(.collapsed) {
+    background-color: var(--tertiary-color);
+    color: black;
+}
+.accordion-button:focus {
+   border-color: var(--tertiary-color);
+}
+
+.form-select {
+    border-color: var(--primary-color);
+}
+.form-select:focus {
+    border-color: var(--tertiary-color);
+    box-shadow: 3px 2px 5px var(--tertiary-color);
+}

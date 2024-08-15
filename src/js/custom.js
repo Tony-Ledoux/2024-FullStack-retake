@@ -622,3 +622,78 @@ offcanvas.addEventListener("show.bs.offcanvas", function (event) {
             console.error("Error:", error);
         });
 });
+
+// event on CollapseTwo open
+const collapseTwo = document.getElementById("collapseTwo");
+collapseTwo.addEventListener("show.bs.collapse", function (event) {
+    const placeholder_data = document.createElement("div");
+    placeholder_data.setAttribute("id", "pharmacist-appointments");
+    //get data from server
+    const today = new Date().toISOString().split("T")[0];
+    fetch(apiUrl + "/appointment/made?date=" + today)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            // get a list of pharmacists
+            const pharmacistList = [...new Set(data.map((item) => item.pharmacist))];
+            // create a select box with the pharmacist names
+            const selectBox = document.createElement("select");
+            selectBox.classList.add("form-select");
+            selectBox.setAttribute("id", "pharmacist-select");
+            selectBox.setAttribute("aria-label", "Select pharmacist");
+            selectBox.innerHTML = "<option selected>Select a pharmacist</option>";
+            for (let i = 0; i < pharmacistList.length; i++) {
+                const pharmacist = pharmacistList[i];
+                const option = document.createElement("option");
+                option.value = pharmacist;
+                option.innerHTML = pharmacist;
+                selectBox.appendChild(option);
+            }
+            selectBox.addEventListener("change", function (event) {
+                let pharmacist = event.target.value;
+                let pharmacistAppointments = data.filter((item) => item.pharmacist === pharmacist);
+                // clear the placeholder data
+                placeholder_data.innerHTML = "";
+                let ap_place_ul = document.createElement("ul");
+                ap_place_ul.classList.add("list-group","mt-3");
+                // add the appointments to the page
+                for (let i = 0; i < pharmacistAppointments.length; i++) {
+                    const appointment = pharmacistAppointments[i];
+                    const appointmentItem = document.createElement("li");
+                    appointmentItem.classList.add("list-group-item");
+                    appointmentItem.innerHTML = "Date: " + appointment.date + "<br>Time: " + appointment.timeslot + "<br>Client: " + appointment.client;
+                    ap_place_ul.appendChild(appointmentItem);
+                }
+                placeholder_data.appendChild(ap_place_ul);
+                console.log(pharmacistAppointments);
+            });
+            // add the select box to the page
+            let place = document.getElementById("collapseTwo").getElementsByClassName("accordion-body")[0];
+            place.innerHTML = "";
+            place.appendChild(selectBox);
+            place.appendChild(placeholder_data);
+            console.log(pharmacistList);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        }).finally(() => {
+            // cleanup that always needs to be done
+        });
+});
+
+// event on CollapseThree open
+const collapseThree = document.getElementById("collapseThree");
+collapseThree.addEventListener("show.bs.collapse", function (event) {
+    const main_content_for_configuration = document.getElementById("collapseThree").getElementsByClassName("accordion-body")[0];
+    // clear the main content
+    main_content_for_configuration.innerHTML = "";
+    // create a form for the configuration
+    const configurationForm = document.createElement("form");
+    configurationForm.setAttribute("id", "configuration-form");
+    configurationForm.setAttribute("novalidate", "");
+    
+});
