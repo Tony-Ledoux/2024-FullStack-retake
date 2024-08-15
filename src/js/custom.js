@@ -313,7 +313,7 @@ function showAvailableTimes(times) {
     // create a radio button for each time in the morning array and append it to the morningPlaceholder
     if (morningTimes.length == 0) {
         morningPlaceholder.appendChild(no_time_available);
-    }else {
+    } else {
         for (let i = 0; i < morningTimes.length; i++) {
             const time = morningTimes[i];
             const timeItem = document.createElement("div");
@@ -332,7 +332,6 @@ function showAvailableTimes(times) {
             <label class="btn btn-secondary" for="time${time.slot_id}">${time.timeslot}</label>`;
         afternoonPlaceholder.appendChild(timeItem);
     }
-
 }
 // submit function for the appointment form
 const appointmentForm = document.getElementById("book_appointment_with_selected_consultant");
@@ -376,7 +375,7 @@ appointmentForm.addEventListener("submit", function (event) {
         })
         .then((data) => {
             // if data containts status 500, show an error message
-            
+
             if (data.status_code === 500) {
                 throw new Error(data.detail);
             }
@@ -393,7 +392,8 @@ appointmentForm.addEventListener("submit", function (event) {
                 errorAlert.classList.add("d-none");
             }, 5000);
             console.error("Error:", error);
-        }).finally(() => {
+        })
+        .finally(() => {
             // clear the form
             appointmentForm.reset();
             // reset the date picker and hide the form and consultants
@@ -401,7 +401,7 @@ appointmentForm.addEventListener("submit", function (event) {
             form.classList.add("d-none");
             consultant_placeholder.classList.add("d-none");
         });
-    
+
     // TODO: send the form data to the server
 });
 
@@ -659,13 +659,14 @@ collapseTwo.addEventListener("show.bs.collapse", function (event) {
                 // clear the placeholder data
                 placeholder_data.innerHTML = "";
                 let ap_place_ul = document.createElement("ul");
-                ap_place_ul.classList.add("list-group","mt-3");
+                ap_place_ul.classList.add("list-group", "mt-3");
                 // add the appointments to the page
                 for (let i = 0; i < pharmacistAppointments.length; i++) {
                     const appointment = pharmacistAppointments[i];
                     const appointmentItem = document.createElement("li");
                     appointmentItem.classList.add("list-group-item");
-                    appointmentItem.innerHTML = "Date: " + appointment.date + "<br>Time: " + appointment.timeslot + "<br>Client: " + appointment.client;
+                    appointmentItem.innerHTML =
+                        "Date: " + appointment.date + "<br>Time: " + appointment.timeslot + "<br>Client: " + appointment.client;
                     ap_place_ul.appendChild(appointmentItem);
                 }
                 placeholder_data.appendChild(ap_place_ul);
@@ -680,7 +681,8 @@ collapseTwo.addEventListener("show.bs.collapse", function (event) {
         })
         .catch((error) => {
             console.error("Error:", error);
-        }).finally(() => {
+        })
+        .finally(() => {
             // cleanup that always needs to be done
         });
 });
@@ -691,9 +693,182 @@ collapseThree.addEventListener("show.bs.collapse", function (event) {
     const main_content_for_configuration = document.getElementById("collapseThree").getElementsByClassName("accordion-body")[0];
     // clear the main content
     main_content_for_configuration.innerHTML = "";
-    // create a form for the configuration
     const configurationForm = document.createElement("form");
     configurationForm.setAttribute("id", "configuration-form");
     configurationForm.setAttribute("novalidate", "");
-    
+    configurationForm.setAttribute("method", "post");
+    // get all pharmacists
+    fetch(apiUrl + "/config/pharmacists")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            // create a select box with the pharmacist names and ids
+            const selectBox = document.createElement("select");
+            selectBox.classList.add("form-select");
+            selectBox.setAttribute("id", "pharmacist-select");
+            selectBox.setAttribute("aria-label", "Select pharmacist");
+            selectBox.innerHTML = `<option value="" selected>Select a pharmacist</option>`;
+            for (let i = 0; i < data.length; i++) {
+                const pharmacist = data[i];
+                const option = document.createElement("option");
+                option.value = pharmacist.id;
+                option.innerHTML = pharmacist.name;
+                selectBox.appendChild(option);
+            }
+            selectBox.addEventListener("change", function (event) {
+                let pharmacistId = event.target.value;
+                console.log(pharmacistId);
+                // clear the configuration form
+                configurationForm.innerHTML = "";
+                configurationForm.appendChild(selectBox);
+                // filter the data for the selected pharmacist
+                let pharmacistData = data.find((item) => item.id == pharmacistId);
+                // set holiday checkbox
+                const holidayCheckbox = document.createElement("div");
+                holidayCheckbox.classList.add("form-check", "form-switch");
+                let holidayLabel = document.createElement("label");
+                holidayLabel.classList.add("form-check-label");
+                holidayLabel.setAttribute("for", "holiday");
+                holidayLabel.innerHTML = "On holiday";
+                let holidayInput = document.createElement("input");
+                holidayInput.setAttribute("type", "checkbox");
+                holidayInput.setAttribute("role", "switch");
+                holidayInput.setAttribute("id", "holiday");
+                holidayInput.setAttribute("name", "on_holiday");
+                if (pharmacistData.on_holidays) {
+                    holidayInput.setAttribute("checked", "");
+                }
+                holidayInput.classList.add("form-check-input");
+                holidayCheckbox.appendChild(holidayInput);
+                holidayCheckbox.appendChild(holidayLabel);
+                configurationForm.appendChild(holidayCheckbox);
+                // get tghe availability data
+                let table = create_availabitity_table(pharmacistData.available);
+                configurationForm.appendChild(table);
+                // add submit button to the form
+                const submitButton = document.createElement("button");
+                submitButton.setAttribute("type", "submit");
+                submitButton.classList.add("btn", "btn-primary");
+                submitButton.innerHTML = "Save";
+                configurationForm.appendChild(submitButton);
+                console.log(pharmacistData);
+            });
+            // add the select box to the form
+            configurationForm.appendChild(selectBox);
+
+            // add the event listener for the form submit
+            configurationForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                const formData = new FormData(configurationForm);
+                const formObject = {};
+                // add the pharmacist id to the form object
+                formObject["pharmacist_id"] = parseInt(selectBox.value);
+                formObject["on_holiday"] = formData.get("on_holiday") === "on" ? 1 : 0;
+                formObject["morning"] = [];
+                formObject["afternoon"] = [];
+                formData.forEach((value, key) => {
+                    if (key.endsWith("_morning")) {
+                        formObject["morning"].push(key.split("_")[0]);
+                    }
+                    if (key.endsWith("_afternoon")) {
+                        formObject["afternoon"].push(key.split("_")[0]);
+                    }
+                });
+                let availability = {"morning":formObject["morning"],"afternoon": formObject["afternoon"]};
+                formObject["availability"] = JSON.stringify(availability);
+                delete formObject["morning"];
+                delete formObject["afternoon"];
+                // send the form data to the server
+                fetch(apiUrl + "/config/pharmacists", {
+                    method: "POST",
+                    body: JSON.stringify(formObject),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Access-Control-Allow-Origin": "*",
+                    },
+                }).then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                }).then((data) => {
+                    console.log(data);
+                }).catch((error) => {
+                    console.error("Error:", error);
+                });
+                console.log(JSON.stringify(formObject));
+            });
+
+            main_content_for_configuration.appendChild(configurationForm);
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        })
+        .finally(() => {
+            // cleanup that always needs to be done
+        });
 });
+
+function create_availabitity_table(data) {
+    const table = document.createElement("table");
+    const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+    const day_parts = ["morning", "afternoon"];
+    table.classList.add("table");
+    const thead = document.createElement("thead");
+    thead.innerHTML = `<tr>
+        <th scope="col">Day</th>
+        <th scope="col">Morning</th>
+        <th scope="col">Afternoon</th>
+    </tr>`;
+    table.appendChild(thead);
+    const tbody = document.createElement("tbody");
+    for (let i = 0; i < days.length; i++) {
+        const day = days[i];
+        const tr = document.createElement("tr");
+        // create a row for each day
+        let td = document.createElement("td");
+        td.innerHTML = day;
+        tr.appendChild(td);
+        // create a checkbox for the morning
+        td = document.createElement("td");
+        let input = document.createElement("input");
+        input.setAttribute("type", "checkbox");
+        input.setAttribute("name", `${day}_morning`);
+        input.setAttribute("id", `${day}_morning`);
+        input.classList.add("form-check-input");
+        //on sunday, disable the checkbox
+        if (day === "sunday") {
+            input.setAttribute("disabled", "");
+        }
+        if (data["morning"].includes(day)) {
+            input.setAttribute("checked", "");
+        }
+        td.appendChild(input);
+        tr.appendChild(td);
+        // create a checkbox for the afternoon
+        td = document.createElement("td");
+        input = document.createElement("input");
+        input.setAttribute("type", "checkbox");
+        input.setAttribute("name", `${day}_afternoon`);
+        input.setAttribute("id", `${day}_afternoon`);
+        input.classList.add("form-check-input");
+        //on saturday and sunday, disable the checkbox
+        if (day === "saturday" || day === "sunday") {
+            input.setAttribute("disabled", "");
+        }
+        if (data["afternoon"].includes(day)) {
+            input.setAttribute("checked", "");
+        }
+        td.appendChild(input);
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    return table;
+}
