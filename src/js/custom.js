@@ -597,7 +597,7 @@ offcanvas.addEventListener("show.bs.offcanvas", function (event) {
         return;
     }
     // fetch questions from the server
-    fetch(apiUrl + "/questions/")
+    fetch(apiUrl + "/questions?closed=0")
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Network response was not ok");
@@ -616,6 +616,9 @@ offcanvas.addEventListener("show.bs.offcanvas", function (event) {
                 questionItem.innerHTML =
                     "recieved:" + question.received + "<br>from:" + question.from + " <br>message:" + question.question;
                 questionList.appendChild(questionItem);
+            }
+            if (data.length === 0) {
+                questionList.innerHTML = "No questions available";
             }
         })
         .catch((error) => {
@@ -779,10 +782,6 @@ collapseThree.addEventListener("show.bs.collapse", function (event) {
                         formObject["afternoon"].push(key.split("_")[0]);
                     }
                 });
-                let availability = {"morning":formObject["morning"],"afternoon": formObject["afternoon"]};
-                formObject["availability"] = JSON.stringify(availability);
-                delete formObject["morning"];
-                delete formObject["afternoon"];
                 // send the form data to the server
                 fetch(apiUrl + "/config/pharmacists", {
                     method: "PUT",
@@ -790,18 +789,22 @@ collapseThree.addEventListener("show.bs.collapse", function (event) {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                }).then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                }).then((data) => {
-                    console.log(data);
-                }).catch((error) => {
-                    console.error("Error:", error);
-                });
-                console.log(JSON.stringify(formObject));
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        // set the success message
+                        alert("Configuration saved");
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
             });
+                
 
             main_content_for_configuration.appendChild(configurationForm);
             console.log(data);
